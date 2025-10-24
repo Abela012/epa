@@ -5,16 +5,37 @@ import { SiteFooter } from "@/components/site-footer"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Target, Calendar, Users, Lightbulb, TrendingUp, FileText, CheckCircle2, Clock, Award } from "lucide-react"
+import { motion } from "framer-motion"
+import { useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
+import Image from "next/image"
 
 export default function TheProjectPage() {
+  const searchParams = useSearchParams()
+  const tabParam = searchParams?.get('tab')
+  const [activeTab, setActiveTab] = useState(tabParam || "overview")
+
+  useEffect(() => {
+    if (tabParam) {
+      setActiveTab(tabParam)
+    }
+  }, [tabParam])
+
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-16">
-          <div className="container mx-auto px-4">
+        <section className="relative bg-gray-900 text-white py-16 overflow-hidden">
+          <Image 
+            src="/New folder/brain.jpg" 
+            alt="Brain background"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+          <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl">
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">The Project</h1>
               <p className="text-xl text-blue-100 text-pretty">
@@ -28,96 +49,128 @@ export default function TheProjectPage() {
         {/* Tabbed Content Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <Tabs defaultValue="overview" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto gap-2 bg-transparent">
-                <TabsTrigger
-                  value="overview"
-                  className="data-[state=active]:bg-blue-600 data-[state=active]:text-white"
-                >
-                  Overview
-                </TabsTrigger>
-                <TabsTrigger
-                  value="objectives"
-                  className="data-[state=active]:bg-blue-600 data-[state=active]:text-white"
-                >
-                  Objectives
-                </TabsTrigger>
-                <TabsTrigger
-                  value="timeline"
-                  className="data-[state=active]:bg-blue-600 data-[state=active]:text-white"
-                >
-                  Timeline
-                </TabsTrigger>
-                <TabsTrigger
-                  value="methodology"
-                  className="data-[state=active]:bg-blue-600 data-[state=active]:text-white"
-                >
-                  Methodology
-                </TabsTrigger>
-                <TabsTrigger value="team" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
-                  Team
-                </TabsTrigger>
-                <TabsTrigger value="impact" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+              <TabsList className="ml-7 grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto gap-2 bg-transparent">
+                <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
+                  <TabsTrigger
+                    value="overview"
+                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer"
+                  >
+                    Overview
+                  </TabsTrigger>
+                </motion.div>
+                <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
+                  <TabsTrigger
+                    value="objectives"
+                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer"
+                  >
+                    Objectives
+                  </TabsTrigger>
+                </motion.div>
+                <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
+                  <TabsTrigger
+                    value="timeline"
+                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer"
+                  >
+                    Timeline
+                  </TabsTrigger>
+                </motion.div>
+                <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
+                  <TabsTrigger
+                    value="methodology"
+                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer"
+                  >
+                    Purpose
+                  </TabsTrigger>
+                </motion.div>
+                <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
+                  <TabsTrigger 
+                    value="team" 
+                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer"
+                  >
+                    Team
+                  </TabsTrigger>
+                </motion.div>
+                {/* <TabsTrigger value="impact" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                   Impact
-                </TabsTrigger>
+                </TabsTrigger> */}
               </TabsList>
 
               {/* Overview Tab */}
               <TabsContent value="overview" className="mt-8">
                 <div className="space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <FileText className="w-6 h-6 text-blue-600" />
-                        Project Overview
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <p className="text-gray-700 leading-relaxed">
-                        The EPA Item Bank project is a groundbreaking initiative by the Ethiopian Psychologists'
-                        Association aimed at revolutionizing educational assessment in Ethiopia. This comprehensive
-                        platform serves as a centralized repository of high-quality, validated test items designed to
-                        support educators, institutions, and policymakers in creating reliable and valid assessments.
-                      </p>
-                      <p className="text-gray-700 leading-relaxed">
-                        Developed through extensive collaboration with educational experts, psychometricians, and
-                        stakeholders across the Ethiopian education sector, the item bank represents a significant step
-                        forward in standardizing and improving assessment practices nationwide.
-                      </p>
-                    </CardContent>
-                  </Card>
-
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <FileText className="w-6 h-6 text-blue-600" />
+                          Project Overview
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <p className="text-gray-700 leading-relaxed">
+                          The “Master of Social Work in Psychosocial Software Engineering” program is a pioneering initiative designed to address the pressing need for digital solutions in psychosocial and mental health services within Ethiopia. This interdisciplinary program integrates principles from social work, psychology, and software engineering, equipping students with the necessary skills to develop innovative technology-driven interventions tailored to the unique challenges faced in the field.
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                   <div className="grid md:grid-cols-3 gap-6">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-lg">Project Scope</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-gray-600">
-                          National coverage across all educational levels, from primary to higher education
-                        </p>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-lg">Duration</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-gray-600">
-                          Multi-year initiative with ongoing development and updates
-                        </p>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-lg">Funding</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-gray-600">
-                          Supported by government agencies and international development partners
-                        </p>
-                      </CardContent>
-                    </Card>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.5, delay: 0, ease: "easeOut" }}
+                    >
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="text-lg">Project Scope</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-gray-600">
+                            All responsible parties engaged in the implementation of project, namely, the Team of Experts that independently created and developed the project; the School of Social Work, CSSAH, AAU, and School of Information Technology and Engineering, SITE, IT, AAU, stakeholders, funders, partners will be bound by the present Guideline following its endorsement.
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
+                    >
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="text-lg">Duration</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-gray-600">
+                            The Master of Social Work in Psychosocial Software Engineering [MSW-PSE] is a two-year, full-time program (120 ECTS[ In this program 1 European Credit Transfer and Accumulation System (ECTS) covers a total of 30 contact hours which translates to 0.625 Credit Hours.]) structured across four terms   to systematically integrate technical and psychosocial expertise.
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
+                    >
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="text-lg">Funding</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-gray-600">
+                            The program is funded by outside sources. Students’ tuition fees will be fully covered by the program through external funding. In the future, students might be sponsored by specific organizations or join the program as self-sponsored students.
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
                   </div>
                 </div>
               </TabsContent>
@@ -125,230 +178,211 @@ export default function TheProjectPage() {
               {/* Objectives Tab */}
               <TabsContent value="objectives" className="mt-8">
                 <div className="space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Target className="w-6 h-6 text-blue-600" />
-                        Project Objectives
-                      </CardTitle>
-                      <CardDescription>
-                        Our strategic goals for transforming educational assessment in Ethiopia
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-6">
-                        <div className="flex gap-4">
-                          <div className="flex-shrink-0">
-                            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                              <CheckCircle2 className="w-5 h-5 text-blue-600" />
-                            </div>
-                          </div>
-                          <div>
-                            <h3 className="font-semibold text-lg mb-2">Standardize Assessment Quality</h3>
-                            <p className="text-gray-600 leading-relaxed">
-                              Establish consistent, high-quality assessment standards across all educational
-                              institutions in Ethiopia through validated and reliable test items.
-                            </p>
-                          </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Target className="w-6 h-6 text-blue-600" />
+                          Specific Objectives
+                        </CardTitle>
+                        <CardDescription>
+                          The project specific objectives are tuned to training at least 100 students in five years in the development of knowledge and skills to: 
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-6">
+                          {[
+                            {
+                              text: "plan, design, develop and implement digital psychosocial services",
+                            },
+                            {
+                              text: "develop digital platforms, such as mobile counseling apps and tele-psychosocial services, etc., to improve access in rural and underserved populations;",
+                            },
+                            {
+                              text: "design digital psychosocial services to guarantee equitable access to services through low-cost, AI-assisted digital interventions that reach vulnerable populations.",
+                            },
+                            {
+                              text: "ensure the development of an interdisciplinary team with expertise in social work, psychology, and software engineering, ensuring the sustainability of the specialization.",
+                            },
+                          ].map((item, idx) => (
+                            <motion.div
+                              key={idx}
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.5, delay: idx * 0.15, ease: "easeOut" }}
+                              className="flex gap-4"
+                            >
+                              <div className="flex-shrink-0">
+                                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                  <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                                </div>
+                              </div>
+                              <div>
+                                <h3 className="text-lg mb-2">{item.text}</h3>
+                              </div>
+                            </motion.div>
+                          ))}
                         </div>
-
-                        <div className="flex gap-4">
-                          <div className="flex-shrink-0">
-                            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                              <CheckCircle2 className="w-5 h-5 text-blue-600" />
-                            </div>
-                          </div>
-                          <div>
-                            <h3 className="font-semibold text-lg mb-2">Enhance Resource Efficiency</h3>
-                            <p className="text-gray-600 leading-relaxed">
-                              Reduce duplication of effort by providing a centralized repository of test items that can
-                              be shared and reused across institutions.
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex gap-4">
-                          <div className="flex-shrink-0">
-                            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                              <CheckCircle2 className="w-5 h-5 text-blue-600" />
-                            </div>
-                          </div>
-                          <div>
-                            <h3 className="font-semibold text-lg mb-2">Support Data-Driven Decision Making</h3>
-                            <p className="text-gray-600 leading-relaxed">
-                              Provide psychometric insights and analytics to help educators and policymakers make
-                              informed decisions about curriculum and instruction.
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex gap-4">
-                          <div className="flex-shrink-0">
-                            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                              <CheckCircle2 className="w-5 h-5 text-blue-600" />
-                            </div>
-                          </div>
-                          <div>
-                            <h3 className="font-semibold text-lg mb-2">Promote Continuous Improvement</h3>
-                            <p className="text-gray-600 leading-relaxed">
-                              Enable ongoing refinement of test items based on usage data and feedback from the
-                              educational community.
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex gap-4">
-                          <div className="flex-shrink-0">
-                            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                              <CheckCircle2 className="w-5 h-5 text-blue-600" />
-                            </div>
-                          </div>
-                          <div>
-                            <h3 className="font-semibold text-lg mb-2">Increase Accessibility</h3>
-                            <p className="text-gray-600 leading-relaxed">
-                              Make high-quality assessment tools accessible to all educational institutions, regardless
-                              of their resources or location.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 </div>
               </TabsContent>
 
               {/* Timeline Tab */}
               <TabsContent value="timeline" className="mt-8">
                 <div className="space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Calendar className="w-6 h-6 text-blue-600" />
-                        Project Timeline
-                      </CardTitle>
-                      <CardDescription>Key milestones and phases of the EPA Item Bank project</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-8">
-                        <div className="relative pl-8 border-l-2 border-blue-200">
-                          <div className="absolute -left-2 top-0 w-4 h-4 bg-blue-600 rounded-full"></div>
-                          <div className="mb-1 flex items-center gap-2">
-                            <Clock className="w-4 h-4 text-blue-600" />
-                            <span className="text-sm font-semibold text-blue-600">Phase 1: Planning & Design</span>
-                          </div>
-                          <p className="text-sm text-gray-500 mb-2">2022 - 2023</p>
-                          <p className="text-gray-700">
-                            Initial project planning, stakeholder consultation, and system design. Development of
-                            technical specifications and item development guidelines.
-                          </p>
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Calendar className="w-6 h-6 text-blue-600" />
+                          Project Timeline
+                        </CardTitle>
+                        <CardDescription>The approach divides the project into distinct phases, each with specific objectives, activities, and deliverables.</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-8">
+                          {[
+                            {
+                              color: "blue-600",
+                              phase: "Phase 1: Planning & Design",
+                              desc: "Initial project planning, stakeholder consultation, and system design. Development of technical specifications and item development guidelines.",
+                            },
+                            {
+                              color: "blue-600",
+                              phase: "Phase 2: Capacity Building and Infrastructure Setup",
+                              desc: "The second phase will focus on preparing faculty and institutional infrastructure for the project launch. Faculty development will include training in interdisciplinary teaching methods and capacity building for the use of digital tools essential to psychosocial software engineering.",
+                            },
+                            {
+                              color: "blue-600",
+                              phase: "Phase 3:  Project Launch and Delivery",
+                              desc: "This phase encompasses the official project launch, accepting students, and the commencement of course delivery.",
+                            },
+                            {
+                              color: "blue-600",
+                              phase: "Phase 4: Monitoring, Evaluation, and Continuous Improvement",
+                              desc: "Following project deployment, systematic monitoring and evaluation will be conducted to assess academic performance, student satisfaction, faculty effectiveness, and overall project impact.",
+                            },
+                            {
+                              color: "green-600",
+                              phase: "Phase 5: Expansion and Sustainability ",
+                              desc: "In the final phase, plans for scaling the project will be developed to include increased student intake, broader research collaborations, and deeper community engagement.",
+                            },
+                          ].map((item, idx) => (
+                            <motion.div
+                              key={idx}
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.5, delay: idx * 0.15, ease: "easeOut" }}
+                              className="relative pl-8 border-l-2 border-blue-200"
+                            >
+                              <div className={`absolute -left-2 top-0 w-4 h-4 bg-${item.color} rounded-full`}></div>
+                              <div className="mb-1 flex items-center gap-2">
+                                <Clock className={`w-4 h-4 text-${item.color}`} />
+                                <span className={`text-sm font-semibold text-${item.color}`}>{item.phase}</span>
+                              </div>
+                              <p className="text-gray-700">{item.desc}</p>
+                            </motion.div>
+                          ))}
                         </div>
-
-                        <div className="relative pl-8 border-l-2 border-blue-200">
-                          <div className="absolute -left-2 top-0 w-4 h-4 bg-blue-600 rounded-full"></div>
-                          <div className="mb-1 flex items-center gap-2">
-                            <Clock className="w-4 h-4 text-blue-600" />
-                            <span className="text-sm font-semibold text-blue-600">Phase 2: Item Development</span>
-                          </div>
-                          <p className="text-sm text-gray-500 mb-2">2023 - 2024</p>
-                          <p className="text-gray-700">
-                            Creation and validation of initial test items across multiple subjects and grade levels.
-                            Pilot testing and psychometric analysis.
-                          </p>
-                        </div>
-
-                        <div className="relative pl-8 border-l-2 border-blue-200">
-                          <div className="absolute -left-2 top-0 w-4 h-4 bg-blue-600 rounded-full"></div>
-                          <div className="mb-1 flex items-center gap-2">
-                            <Clock className="w-4 h-4 text-blue-600" />
-                            <span className="text-sm font-semibold text-blue-600">Phase 3: Platform Development</span>
-                          </div>
-                          <p className="text-sm text-gray-500 mb-2">2024</p>
-                          <p className="text-gray-700">
-                            Development of the digital platform, user interface design, and integration of assessment
-                            tools and analytics features.
-                          </p>
-                        </div>
-
-                        <div className="relative pl-8 border-l-2 border-blue-200">
-                          <div className="absolute -left-2 top-0 w-4 h-4 bg-blue-600 rounded-full"></div>
-                          <div className="mb-1 flex items-center gap-2">
-                            <Clock className="w-4 h-4 text-blue-600" />
-                            <span className="text-sm font-semibold text-blue-600">Phase 4: Pilot Implementation</span>
-                          </div>
-                          <p className="text-sm text-gray-500 mb-2">2024 - 2025</p>
-                          <p className="text-gray-700">
-                            Pilot launch with select institutions, user training, feedback collection, and system
-                            refinement based on real-world usage.
-                          </p>
-                        </div>
-
-                        <div className="relative pl-8 border-l-2 border-blue-200">
-                          <div className="absolute -left-2 top-0 w-4 h-4 bg-green-600 rounded-full"></div>
-                          <div className="mb-1 flex items-center gap-2">
-                            <Clock className="w-4 h-4 text-green-600" />
-                            <span className="text-sm font-semibold text-green-600">Phase 5: National Rollout</span>
-                          </div>
-                          <p className="text-sm text-gray-500 mb-2">2025 - Ongoing</p>
-                          <p className="text-gray-700">
-                            Full national deployment, continuous item development, ongoing support, and regular platform
-                            updates based on user needs.
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 </div>
               </TabsContent>
 
-              {/* Methodology Tab */}
+              {/* Purpose Tab */}
               <TabsContent value="methodology" className="mt-8">
                 <div className="space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Lightbulb className="w-6 h-6 text-blue-600" />
-                        Project Methodology
-                      </CardTitle>
-                      <CardDescription>Our approach to developing and validating assessment items</CardDescription>
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Lightbulb className="w-6 h-6 text-blue-600" />
+                          Project Purpose
+                        </CardTitle>
+                      <CardDescription>The purpose of this Project Management Guideline is to provide a comprehensive framework for the effective planning, implementation, and evaluation of the “Master of Social Work in Psychosocial Software Engineering” project at Addis Ababa University (AAU). </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
                       <div>
-                        <h3 className="font-semibold text-lg mb-3">Item Development Process</h3>
+                        <h3 className="font-semibold text-lg mb-3">key functions</h3>
                         <div className="grid md:grid-cols-2 gap-4">
-                          <div className="bg-blue-50 p-4 rounded-lg">
-                            <h4 className="font-semibold mb-2">1. Content Specification</h4>
-                            <p className="text-sm text-gray-600">
-                              Alignment with national curriculum standards and learning objectives
-                            </p>
-                          </div>
-                          <div className="bg-blue-50 p-4 rounded-lg">
-                            <h4 className="font-semibold mb-2">2. Item Writing</h4>
-                            <p className="text-sm text-gray-600">
-                              Expert educators create items following established guidelines
-                            </p>
-                          </div>
-                          <div className="bg-blue-50 p-4 rounded-lg">
-                            <h4 className="font-semibold mb-2">3. Expert Review</h4>
-                            <p className="text-sm text-gray-600">Content and bias review by subject matter experts</p>
-                          </div>
-                          <div className="bg-blue-50 p-4 rounded-lg">
-                            <h4 className="font-semibold mb-2">4. Field Testing</h4>
-                            <p className="text-sm text-gray-600">Pilot testing with representative student samples</p>
-                          </div>
-                          <div className="bg-blue-50 p-4 rounded-lg">
-                            <h4 className="font-semibold mb-2">5. Psychometric Analysis</h4>
-                            <p className="text-sm text-gray-600">
-                              Statistical analysis of item difficulty, discrimination, and reliability
-                            </p>
-                          </div>
-                          <div className="bg-blue-50 p-4 rounded-lg">
-                            <h4 className="font-semibold mb-2">6. Item Banking</h4>
-                            <p className="text-sm text-gray-600">Validated items added to the database with metadata</p>
-                          </div>
+                          <motion.div
+                            className="bg-blue-50 p-4 rounded-lg"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: 0, ease: "easeOut" }}
+                          >
+                            <h4 className=" mb-2">Establishing a Clear Framework: It outlines the project management structure, including governance, oversight, and the roles of various team members with the appreciation that a clarity is essential for fostering collaboration and accountability among the project implementers, faculty, and administrative staff.</h4>
+                          </motion.div>
+                          <motion.div
+                            className="bg-blue-50 p-4 rounded-lg"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
+                          >
+                            <h4 className="mb-2">Guiding Project Implementation: The guideline provides a phased approach to project implementation, detailing the steps necessary for curriculum development, faculty recruitment, and infrastructure setup with the understanding that a structured approach ensures that the project is developed systematically and efficiently, addressing the unique needs of Ethiopia's psychosocial education, training, and services landscape.</h4>
+                          </motion.div>
+                          <motion.div
+                            className="bg-blue-50 p-4 rounded-lg"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
+                          >
+                            <h4 className="mb-2">Enhancing Capacity Building: The guideline, by integrating interdisciplinary knowledge from social work, psychology, and software engineering, emphasizes the importance of building local expertise, thus, aims to equip professionals with the skills needed to develop technology-driven interventions that address psychological and social challenges in Ethiopia.</h4>
+                          </motion.div>
+                          <motion.div
+                            className="bg-blue-50 p-4 rounded-lg"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: 0.45, ease: "easeOut" }}
+                          >
+                            <h4 className="mb-2">Promoting Stakeholder Engagement: The guideline outlines strategies for engaging key stakeholders, including academic institutions, government ministries, professional associations, and community organizations with the intent to foster collaboration and communication towards leveraging diverse resources and expertise to enhance its impact.</h4>
+                          </motion.div>
+                          <motion.div
+                            className="bg-blue-50 p-4 rounded-lg"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
+                          >
+                            <h4 className="mb-2">Ensuring Sustainability: The guideline emphasizes the importance of developing a sustainable model for the project, which includes financial planning, risk management, and long-term strategies for maintaining the project's relevance and effectiveness in addressing psychosocial and mental health service needs.</h4>
+                          </motion.div>
+                          <motion.div
+                            className="bg-blue-50 p-4 rounded-lg"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: 0.75, ease: "easeOut" }}
+                          >
+                            <h4 className=" mb-2">Facilitating Monitoring and Evaluation: The guideline establishes a framework for monitoring and evaluating the project's progress and outcomes, thus, ensuring that the project remains aligned with its objectives and can adapt to changing needs and challenges in the field of psychosocial software engineering consistent with the policy instruments and guidelines of Addis Ababa University.</h4>
+                          </motion.div>
                         </div>
                       </div>
 
-                      <div>
+                      {/* <div>
                         <h3 className="font-semibold text-lg mb-3">Quality Assurance Standards</h3>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2">
@@ -376,9 +410,10 @@ export default function TheProjectPage() {
                             </span>
                           </li>
                         </ul>
-                      </div>
+                      </div> */}
                     </CardContent>
                   </Card>
+                  </motion.div>
                 </div>
               </TabsContent>
 
@@ -398,66 +433,144 @@ export default function TheProjectPage() {
                         <div>
                           <h3 className="font-semibold text-lg mb-4">Core Team</h3>
                           <div className="grid md:grid-cols-2 gap-4">
-                            <div className="border rounded-lg p-4">
+                            <motion.div 
+                              className="border rounded-lg p-4"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.5 }}
+                              whileHover={{ y: -4 }}
+                            >
                               <h4 className="font-semibold mb-1">Project Director</h4>
-                              <p className="text-sm text-gray-600 mb-2">Ethiopian Psychologists' Association</p>
+                              <p className="text-sm text-gray-600 mb-2">Accountable to: The Head of the School of Social Work (SoSW), AAU</p>
                               <p className="text-sm text-gray-700">
-                                Overall project leadership and strategic direction
+                               Provide overall leadership and strategic direction for the project.
                               </p>
-                            </div>
-                            <div className="border rounded-lg p-4">
-                              <h4 className="font-semibold mb-1">Technical Lead</h4>
-                              <p className="text-sm text-gray-600 mb-2">Platform Development Team</p>
-                              <p className="text-sm text-gray-700">System architecture and technical implementation</p>
-                            </div>
-                            <div className="border rounded-lg p-4">
-                              <h4 className="font-semibold mb-1">Psychometric Specialist</h4>
-                              <p className="text-sm text-gray-600 mb-2">Assessment Research Team</p>
-                              <p className="text-sm text-gray-700">Item validation and statistical analysis</p>
-                            </div>
-                            <div className="border rounded-lg p-4">
-                              <h4 className="font-semibold mb-1">Content Coordinator</h4>
-                              <p className="text-sm text-gray-600 mb-2">Curriculum Alignment Team</p>
-                              <p className="text-sm text-gray-700">Subject matter expertise and content development</p>
-                            </div>
+                            </motion.div>
+                            <motion.div 
+                              className="border rounded-lg p-4"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.5, delay: 0.1 }}
+                              whileHover={{ y: -4 }}
+                            >
+                              <h4 className="font-semibold mb-1">International Project Coordinator</h4>
+                              <p className="text-sm text-gray-600 mb-2">Accountable to: Project Director </p>
+                              <p className="text-sm text-gray-700">Coordinate international collaboration and partnerships for the project.</p>
+                            </motion.div>
+                            <motion.div 
+                              className="border rounded-lg p-4"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.5, delay: 0.2 }}
+                              whileHover={{ y: -4 }}
+                            >
+                              <h4 className="font-semibold mb-1">Technical Advisor in Software Engineering</h4>
+                              <p className="text-sm text-gray-600 mb-2">Accountable to: Project Director</p>
+                              <p className="text-sm text-gray-700">Provide technical expertise in software engineering relevant to the project. </p>
+                            </motion.div>
+                            <motion.div 
+                              className="border rounded-lg p-4"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.5, delay: 0.3 }}
+                              whileHover={{ y: -4 }}
+                            >
+                              <h4 className="font-semibold mb-1">Assistant Project Coordinator</h4>
+                              <p className="text-sm text-gray-600 mb-2">Accountable to: Project Director</p>
+                              <p className="text-sm text-gray-700">Support the Project Director in day-to-day operations and project management.</p>
+                            </motion.div>
+                             <motion.div 
+                              className="border rounded-lg p-4"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.5, delay: 0.4 }}
+                              whileHover={{ y: -4 }}
+                            >
+                              <h4 className="font-semibold mb-1">Monitoring and Evaluation Officer</h4>
+                              <p className="text-sm text-gray-600 mb-2">Accountable to: Project Director</p>
+                              <p className="text-sm text-gray-700">Develop and implement the monitoring and evaluation framework for the project.</p>
+                            </motion.div>
+                             <motion.div 
+                              className="border rounded-lg p-4"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.5, delay: 0.5 }}
+                              whileHover={{ y: -4 }}
+                            >
+                              <h4 className="font-semibold mb-1">Administration and Finance Officer</h4>
+                              <p className="text-sm text-gray-600 mb-2">Accountable to: Project Director</p>
+                              <p className="text-sm text-gray-700">Manage the financial resources of the project, including budgeting and expenditures</p>
+                            </motion.div>
+                             <motion.div 
+                              className="border rounded-lg p-4"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.5, delay: 0.6 }}
+                              whileHover={{ y: -4 }}
+                            >
+                              <h4 className="font-semibold mb-1">Secretary / Caretaker</h4>
+                              <p className="text-sm text-gray-600 mb-2">Accountable to: Assistant Project Director</p>
+                              <p className="text-sm text-gray-700">Facilitates collaboration with the Finance Office of the College of Social Sciences and Humanities, Addis Ababa University.</p>
+                            </motion.div>
                           </div>
                         </div>
 
                         <div>
-                          <h3 className="font-semibold text-lg mb-4">Advisory Board</h3>
+                          <h3 className="font-semibold text-lg mb-4">Academic Staff Members</h3>
                           <div className="space-y-3">
-                            <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <motion.div 
+                              className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg"
+                              initial={{ opacity: 0, y: 15 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.45 }}
+                              whileHover={{ x: 5 }}
+                            >
                               <Award className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
                               <div>
-                                <h4 className="font-semibold">Ministry of Education Representatives</h4>
+                                <h4 className="font-semibold">Academic Staff Members</h4>
                                 <p className="text-sm text-gray-600">
-                                  Policy guidance and national education alignment
+                                 Deliver courses independently within the project curriculum
                                 </p>
                               </div>
-                            </div>
-                            <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            </motion.div>
+                            <motion.div 
+                              className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg"
+                              initial={{ opacity: 0, y: 15 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.45, delay: 0.1 }}
+                              whileHover={{ x: 5 }}
+                            >
                               <Award className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
                               <div>
-                                <h4 className="font-semibold">University Professors</h4>
-                                <p className="text-sm text-gray-600">Academic expertise and research methodology</p>
+                                <h4 className="font-semibold">International Faculty Members Engaging in Team-Teaching</h4>
+                                <p className="text-sm text-gray-600">Collaborate with local faculty to deliver courses in the project.</p>
                               </div>
-                            </div>
-                            <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            </motion.div>
+                            <motion.div 
+                              className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg"
+                              initial={{ opacity: 0, y: 15 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true, margin: "-50px" }}
+                              transition={{ duration: 0.45, delay: 0.2 }}
+                              whileHover={{ x: 5 }}
+                            >
                               <Award className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
                               <div>
-                                <h4 className="font-semibold">School Administrators</h4>
+                                <h4 className="font-semibold">Local Faculty Members Engaging in Team-Teaching</h4>
                                 <p className="text-sm text-gray-600">
-                                  Practical implementation insights and user needs
+                                  Collaborate with international and local faculty to deliver courses.
                                 </p>
                               </div>
-                            </div>
-                            <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                              <Award className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
-                              <div>
-                                <h4 className="font-semibold">International Assessment Experts</h4>
-                                <p className="text-sm text-gray-600">Global best practices and quality standards</p>
-                              </div>
-                            </div>
+                            </motion.div>
                           </div>
                         </div>
                       </div>

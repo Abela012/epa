@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -52,12 +52,19 @@ export default function ContactUsPage() {
       <SiteHeader />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gray-900 text-white py-20 overflow-hidden">
+        <Image
+          src="/New folder/brain.jpg"
+          alt="Background"
+          fill
+          className="object-cover opacity-20"
+          priority
+        />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">Contact Us</h1>
             <p className="text-xl text-blue-100 leading-relaxed">
-              Get in touch with the EPA Item Bank team. We're here to help with your questions and inquiries.
+              Get in touch with the Master of Social Work in Psychosocial Software Engineering team. We're here to help with your questions and inquiries.
             </p>
           </div>
         </div>
@@ -70,7 +77,7 @@ export default function ContactUsPage() {
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Get in Touch</h2>
             <p className="text-gray-700 leading-relaxed mb-8">
-              Have questions about the EPA Item Bank? Need technical support or want to learn more about our services?
+              Have questions about the Master of Social Work in Psychosocial Software Engineering? Need support or want to learn more about our program?
               We'd love to hear from you. Reach out to us using any of the methods below.
             </p>
 
@@ -84,7 +91,7 @@ export default function ContactUsPage() {
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">Office Address</h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Ethiopian Psychologists' Association
+                        Ethiopian Psychosocial Association
                         <br />
                         Addis Ababa, Ethiopia
                         <br />
@@ -223,64 +230,7 @@ export default function ContactUsPage() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">How do I access the item bank?</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 leading-relaxed">
-                    To access the EPA Item Bank, you need to register for an account through our platform. Once
-                    approved, you'll receive login credentials to access the full database of test items.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Who can use the EPA Item Bank?</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 leading-relaxed">
-                    The item bank is available to educators, educational institutions, researchers, and authorized
-                    personnel within the Ethiopian education system. Contact us for more information about eligibility
-                    and registration.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Is there a cost to use the item bank?</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 leading-relaxed">
-                    Access policies and any associated costs vary depending on your institution and intended use. Please
-                    contact us directly to discuss your specific needs and learn about available options.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">How often is the item bank updated?</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 leading-relaxed">
-                    The EPA Item Bank is continuously updated with new validated items. We conduct regular reviews and
-                    add new content aligned with curriculum changes and educational standards.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       <SiteFooter />
     </div>

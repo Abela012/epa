@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { Calendar, Clock, MapPin, Newspaper, Users, Award } from "lucide-react"
+import Image from "next/image"
 
 export default function NewsAndEventsPage() {
   const newsItems = [
     {
-      title: "EPA Item Bank Launches New Assessment Features",
+      title: "Program Introduces New Digital Intervention Features",
       date: "March 15, 2024",
       category: "Product Update",
       excerpt:
@@ -32,7 +33,7 @@ export default function NewsAndEventsPage() {
       image: "/students-learning-classroom.jpg",
     },
     {
-      title: "10,000 Teachers Now Using EPA Item Bank",
+      title: "10,000 Practitioners Trained in Psychosocial Software Engineering",
       date: "February 20, 2024",
       category: "Milestone",
       excerpt:
@@ -48,7 +49,7 @@ export default function NewsAndEventsPage() {
       image: "/training-workshop-education.jpg",
     },
     {
-      title: "EPA Item Bank Wins Innovation Award",
+      title: "Program Wins Innovation Award",
       date: "January 25, 2024",
       category: "Award",
       excerpt:
@@ -123,12 +124,19 @@ export default function NewsAndEventsPage() {
       <SiteHeader />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gray-900 text-white py-20 overflow-hidden">
+        <Image
+          src="/New folder/brain.jpg"
+          alt="Background"
+          fill
+          className="object-cover opacity-20"
+          priority
+        />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">News & Events</h1>
             <p className="text-xl text-blue-100 leading-relaxed">
-              Stay updated with the latest news, announcements, and upcoming events from the EPA Item Bank
+              Stay updated with the latest news, announcements, and upcoming events from the Master of Social Work in Psychosocial Software Engineering
             </p>
           </div>
         </div>
@@ -166,7 +174,7 @@ export default function NewsAndEventsPage() {
       </section>
 
       {/* Upcoming Events Section */}
-      <section className="bg-gray-50 py-16">
+      {/* <section className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
@@ -206,85 +214,7 @@ export default function NewsAndEventsPage() {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* Past Events Highlights */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Past Events Highlights</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card className="border-2">
-              <CardHeader>
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <Users className="w-6 h-6 text-blue-600" />
-                </div>
-                <CardTitle className="text-lg">National Workshop 2023</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700 text-sm leading-relaxed mb-2">December 2023</p>
-                <p className="text-gray-700 leading-relaxed">
-                  Over 200 educators participated in our largest workshop focused on assessment literacy and item bank
-                  usage.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2">
-              <CardHeader>
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                  <Award className="w-6 h-6 text-green-600" />
-                </div>
-                <CardTitle className="text-lg">Launch Event</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700 text-sm leading-relaxed mb-2">September 2023</p>
-                <p className="text-gray-700 leading-relaxed">
-                  Official launch of the EPA Item Bank with keynote speeches from education leaders and stakeholders.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2">
-              <CardHeader>
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <Newspaper className="w-6 h-6 text-purple-600" />
-                </div>
-                <CardTitle className="text-lg">Research Symposium</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700 text-sm leading-relaxed mb-2">October 2023</p>
-                <p className="text-gray-700 leading-relaxed">
-                  Researchers presented findings on assessment validity and the impact of the item bank on education
-                  quality.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Signup */}
-      <section className="bg-blue-600 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Stay Informed</h2>
-            <p className="text-xl text-blue-100 mb-8">
-              Subscribe to our newsletter to receive the latest news, event announcements, and updates directly in your
-              inbox.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
-              />
-              <Button size="lg" variant="secondary">
-                Subscribe
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      </section> */}
 
       <SiteFooter />
     </div>

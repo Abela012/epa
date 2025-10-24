@@ -7,9 +7,9 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "EPA Item Bank - Educational Assessment Platform",
+  title: "Master of Social Work in Psychosocial Software Engineering",
   description:
-    "Multi-purpose national item bank by Ethiopian Psychologists' Association for revolutionizing educational assessments with data-driven insights",
+    "Graduate specialization integrating social work, psychosocial, and software engineering to build ethical, inclusive digital psychosocial services.",
   generator: "v0.app",
 }
 

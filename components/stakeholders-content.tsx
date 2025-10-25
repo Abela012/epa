@@ -229,7 +229,7 @@ export function StakeholdersContent() {
             </motion.h2>
           <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12" variants={containerVariants}>
             <motion.div 
-              className="flex flex-col items-center" 
+              className=" perspective-1000 flex flex-col items-center" 
               variants={itemVariants}
               whileHover={{ 
                 scale: 1.05, 
@@ -238,7 +238,7 @@ export function StakeholdersContent() {
                 rotateY: 5,
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
-              className="perspective-1000"
+              
             >
               <motion.div 
                 className={`relative w-32 h-32 mb-4 backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
@@ -267,7 +267,7 @@ export function StakeholdersContent() {
             </motion.div>
             
             <motion.div 
-              className="flex flex-col items-center" 
+              className="perspective-1000 flex flex-col items-center" 
               variants={itemVariants}
               whileHover={{ 
                 scale: 1.05, 
@@ -276,7 +276,7 @@ export function StakeholdersContent() {
                 rotateY: -5,
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
-              className="perspective-1000"
+              
             >
               <motion.div 
                 className={`relative w-32 h-32 mb-4 backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
@@ -305,7 +305,7 @@ export function StakeholdersContent() {
             </motion.div>
             
             <motion.div 
-              className="flex flex-col items-center" 
+              className="perspective-1000 flex flex-col items-center" 
               variants={itemVariants}
               whileHover={{ 
                 scale: 1.05, 
@@ -314,7 +314,7 @@ export function StakeholdersContent() {
                 rotateY: -5,
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
-              className="perspective-1000"
+             
             >
               <motion.div 
                 className={`relative w-32 h-32 mb-4 backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
@@ -343,7 +343,7 @@ export function StakeholdersContent() {
             </motion.div>
             
             <motion.div 
-              className="flex flex-col items-center" 
+              className="perspective-1000 flex flex-col items-center" 
               variants={itemVariants}
               whileHover={{ 
                 scale: 1.05, 
@@ -352,7 +352,7 @@ export function StakeholdersContent() {
                 rotateY: 5,
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
-              className="perspective-1000"
+              
             >
               <motion.div 
                 className={`relative w-32 h-32 mb-4 backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${

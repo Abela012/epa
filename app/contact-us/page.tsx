@@ -9,10 +9,16 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { Mail, Phone, MapPin, Clock } from "lucide-react"
+import { Mail, Phone, MapPin, Clock, Sparkles, Send, ArrowRight, Zap, Target, Shield } from "lucide-react"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useTheme } from "next-themes"
 import { useState } from "react"
 
 export default function ContactUsPage() {
+  const { theme } = useTheme()
+  const { scrollYProgress } = useScroll()
+  const y = useTransform(scrollYProgress, [0, 1], [0, -50])
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -48,84 +54,307 @@ export default function ContactUsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className={`min-h-screen transition-colors duration-500 ${
+      theme === 'dark' 
+        ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900' 
+        : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
+    }`}>
       <SiteHeader />
 
-      {/* Hero Section */}
-      <section className="relative bg-gray-900 text-white py-20 overflow-hidden">
+      {/* Enhanced Hero Section with 3D Design */}
+      <motion.section 
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        {/* Enhanced animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div 
+            style={{ y }}
+            className={`absolute -top-40 -right-40 w-80 h-80 rounded-full mix-blend-multiply filter blur-xl animate-pulse ${
+              theme === 'dark' ? 'bg-blue-500 opacity-30' : 'bg-blue-400 opacity-20'
+            }`}
+          ></motion.div>
+          <motion.div 
+            style={{ y: useTransform(scrollYProgress, [0, 1], [0, 50]) }}
+            className={`absolute -bottom-40 -left-40 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000 ${
+              theme === 'dark' ? 'bg-purple-500 opacity-25' : 'bg-purple-400 opacity-15'
+            }`}
+          ></motion.div>
+          <motion.div 
+            style={{ y: useTransform(scrollYProgress, [0, 1], [0, -30]) }}
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000 ${
+              theme === 'dark' ? 'bg-indigo-500 opacity-20' : 'bg-indigo-400 opacity-10'
+            }`}
+          ></motion.div>
+        </div>
+        
         <Image
           src="/New folder/brain.jpg"
           alt="Background"
           fill
-          className="object-cover opacity-20"
+          className={`object-cover transition-opacity duration-500 ${
+            theme === 'dark' ? 'opacity-20' : 'opacity-10'
+          }`}
           priority
         />
+        
+        {/* Glassmorphism overlay */}
+        <div className={`absolute inset-0 backdrop-blur-sm transition-all duration-500 ${
+          theme === 'dark' 
+            ? 'bg-gradient-to-br from-gray-900/40 via-blue-900/30 to-indigo-900/40' 
+            : 'bg-gradient-to-br from-blue-900/20 via-indigo-900/30 to-purple-900/20'
+        }`}></div>
+        
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">Contact Us</h1>
-            <p className="text-xl text-blue-100 leading-relaxed">
-              Get in touch with the Master of Social Work in Psychosocial Software Engineering team. We're here to help with your questions and inquiries.
-            </p>
+          <div className="max-w-6xl mx-auto text-center">
+            {/* Enhanced floating badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -5,
+                rotateX: 5,
+                rotateY: 5,
+                transition: { type: "spring", stiffness: 300, damping: 20 }
+              }}
+              className="perspective-1000"
+            >
+              <div className={`inline-flex items-center gap-3 backdrop-blur-md border rounded-full px-8 py-4 mb-8 transition-all duration-500 shadow-lg hover:shadow-2xl ${
+                theme === 'dark' 
+                  ? 'bg-white/10 border-white/20 hover:bg-white/15' 
+                  : 'bg-white/20 border-white/30 hover:bg-white/25'
+              }`}>
+                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
+                <Sparkles className="w-5 h-5 text-green-400" />
+                <span className={`font-semibold text-lg transition-colors duration-500 ${
+                  theme === 'dark' ? 'text-white/90' : 'text-white/90'
+                }`}>Contact Us</span>
+              </div>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              whileHover={{ 
+                scale: 1.02,
+                transition: { type: "spring", stiffness: 300, damping: 20 }
+              }}
+              className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight perspective-1000"
+            >
+              <motion.span 
+                className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+                whileHover={{ 
+                  rotateX: 5,
+                  rotateY: 5,
+                  transition: { type: "spring", stiffness: 300, damping: 20 }
+                }}
+              >
+                Contact Us
+              </motion.span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              whileHover={{ 
+                scale: 1.01,
+                transition: { type: "spring", stiffness: 300, damping: 20 }
+              }}
+              className="text-xl md:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto leading-relaxed perspective-1000"
+            >
+              Get in touch with the Master of Social Work in Psychosocial Software Engineering team. We're here to help with your
+              <motion.span 
+                className="font-semibold text-white"
+                whileHover={{ 
+                  rotateX: 2,
+                  rotateY: 2,
+                  transition: { type: "spring", stiffness: 300, damping: 20 }
+                }}
+              >
+                {" "}questions and inquiries{" "}
+              </motion.span>
+            </motion.p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Contact Information and Form */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Information */}
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Get in Touch</h2>
-            <p className="text-gray-700 leading-relaxed mb-8">
-              Have questions about the Master of Social Work in Psychosocial Software Engineering? Need support or want to learn more about our program?
-              We'd love to hear from you. Reach out to us using any of the methods below.
-            </p>
+      {/* Enhanced Contact Information and Form */}
+      <motion.section 
+        className={`relative py-32 overflow-hidden transition-colors duration-500 ${
+          theme === 'dark' 
+            ? 'bg-gradient-to-br from-gray-800 via-blue-900 to-indigo-900' 
+            : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
+        }`}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <motion.div 
+            style={{ y }}
+            className={`absolute top-20 right-20 w-40 h-40 rounded-full blur-3xl animate-pulse ${
+              theme === 'dark' ? 'bg-blue-500/20' : 'bg-blue-300/20'
+            }`}
+          />
+          <motion.div 
+            style={{ y: useTransform(scrollYProgress, [0, 1], [0, 30]) }}
+            className={`absolute bottom-20 left-20 w-32 h-32 rounded-full blur-3xl animate-pulse delay-1000 ${
+              theme === 'dark' ? 'bg-purple-500/20' : 'bg-purple-300/20'
+            }`}
+          />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* Enhanced Contact Information */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ 
+                scale: 1.02, 
+                y: -5,
+                rotateX: 3,
+                rotateY: 3,
+                transition: { type: "spring", stiffness: 300, damping: 20 }
+              }}
+              className="perspective-1000"
+            >
+              <motion.h2 
+                className={`text-4xl md:text-5xl font-black mb-8 leading-tight transition-colors duration-500 ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                whileHover={{ 
+                  scale: 1.02,
+                  transition: { type: "spring", stiffness: 300, damping: 20 }
+                }}
+              >
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Get in Touch
+                </span>
+              </motion.h2>
+              
+              <motion.p 
+                className={`text-lg leading-relaxed mb-8 transition-colors duration-500 ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                }`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                Have questions about the Master of Social Work in Psychosocial Software Engineering? Need support or want to learn more about our program?
+                We'd love to hear from you. Reach out to us using any of the methods below.
+              </motion.p>
 
-            <div className="space-y-6">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Office Address</h3>
-                      <p className="text-gray-700 leading-relaxed">
-                        Ethiopian Psychosocial Association
-                        <br />
-                        Addis Ababa, Ethiopia
-                        <br />
-                        P.O. Box: XXXX
-                      </p>
+              <div className="space-y-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  whileHover={{ 
+                    scale: 1.02, 
+                    y: -5,
+                    rotateX: 3,
+                    rotateY: 3,
+                    transition: { type: "spring", stiffness: 300, damping: 20 }
+                  }}
+                  className="perspective-1000"
+                >
+                  <div className={`relative backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
+                    theme === 'dark' 
+                      ? 'bg-white/10 border-white/20' 
+                      : 'bg-white/20 border-white/30'
+                  }`}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-indigo-500/10"></div>
+                    <div className="relative p-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                          <MapPin className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className={`font-semibold text-lg mb-2 transition-colors duration-500 ${
+                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                          }`}>Office Address</h3>
+                          <p className={`leading-relaxed transition-colors duration-500 ${
+                            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                          }`}>
+                            Ethiopian Psychosocial Association
+                            <br />
+                            Addis Ababa, Ethiopia
+                            <br />
+                            P.O. Box: XXXX
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </motion.div>
 
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-green-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
-                      <p className="text-gray-700">
-                        General Inquiries:{" "}
-                        <a href="mailto:info@epaitembank.com" className="text-blue-600 hover:underline">
-                          info@epaitembank.com
-                        </a>
-                      </p>
-                      <p className="text-gray-700">
-                        Technical Support:{" "}
-                        <a href="mailto:support@epaitembank.com" className="text-blue-600 hover:underline">
-                          support@epaitembank.com
-                        </a>
-                      </p>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  whileHover={{ 
+                    scale: 1.02, 
+                    y: -5,
+                    rotateX: -3,
+                    rotateY: -3,
+                    transition: { type: "spring", stiffness: 300, damping: 20 }
+                  }}
+                  className="perspective-1000"
+                >
+                  <div className={`relative backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
+                    theme === 'dark' 
+                      ? 'bg-white/10 border-white/20' 
+                      : 'bg-white/20 border-white/30'
+                  }`}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10"></div>
+                    <div className="relative p-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
+                          <Mail className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className={`font-semibold text-lg mb-2 transition-colors duration-500 ${
+                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                          }`}>Email</h3>
+                          <p className={`transition-colors duration-500 ${
+                            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                          }`}>
+                            General Inquiries:{" "}
+                            <a href="mailto:info@epaitembank.com" className="text-blue-400 hover:text-blue-300 hover:underline transition-colors duration-300">
+                              info@epaitembank.com
+                            </a>
+                          </p>
+                          <p className={`transition-colors duration-500 ${
+                            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                          }`}>
+                            Technical Support:{" "}
+                            <a href="mailto:support@epaitembank.com" className="text-blue-400 hover:text-blue-300 hover:underline transition-colors duration-300">
+                              support@epaitembank.com
+                            </a>
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </motion.div>
 
               <Card>
                 <CardContent className="pt-6">
@@ -158,10 +387,23 @@ export default function ContactUsPage() {
                 </CardContent>
               </Card>
             </div>
-          </div>
+            </motion.div>
 
           {/* Contact Form */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            whileHover={{ 
+              scale: 1.02, 
+              y: -5,
+              rotateX: -3,
+              rotateY: -3,
+              transition: { type: "spring", stiffness: 300, damping: 20 }
+            }}
+            className="perspective-1000"
+          >
             <Card className="border-2">
               <CardHeader>
                 <CardTitle className="text-2xl">Send Us a Message</CardTitle>
@@ -226,11 +468,10 @@ export default function ContactUsPage() {
                 </form>
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
         </div>
-      </section>
-
-      
+        </div>
+      </motion.section>
 
       <SiteFooter />
     </div>

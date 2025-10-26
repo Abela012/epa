@@ -365,598 +365,55 @@ export default function AboutItemBankPage() {
                 </div>
               </div>
               <div>
-                <h3 className={`text-xl font-semibold mb-2 transition-colors duration-500 ${
-                  theme === 'dark' ? 'text-white' : 'text-gray-900'
-                }`}>Facilities</h3>
-                <p className={`leading-relaxed transition-colors duration-500 ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                  The program will be equipped with administrative office, classroom, and laboratory facilities to support teaching, research, and program administration.
-                </p>
-                <ul className={`mt-3 list-disc pl-6 space-y-2 transition-colors duration-500 ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                  <li>
-                    <strong className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>Administrative Office:</strong> Equipped as per the specification in the project proposal (see Annex B for details).
-                  </li>
-                  <li>
-                    <strong className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>Classrooms:</strong> Equipped with inputs as per the specifications in the project proposal (see Annex C for details).
-                  </li>
-                  <li>
-                    <strong className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>Technical Software Engineering Laboratory:</strong> Equipped with the necessary inputs as per the specification in the project proposal (see Annex D for details).
-                  </li>
-                  <li>
-                    <strong className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>Psychosocial Software Engineering Laboratory:</strong> Equipped with the necessary inputs as per the specification in the project proposal (see Annex E for details).
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center">
-                 
-                </div>
-              </div>
-              <div>
-                <h3 className={`text-xl font-semibold mb-2 transition-colors duration-500 ${
-                  theme === 'dark' ? 'text-white' : 'text-gray-900'
-                }`}>Financial Resources</h3>
-                <p className={`leading-relaxed transition-colors duration-500 ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                 The program is funded by outside sources. Students’ tuition fees will be fully covered by the program through external funding. In the future, students might be sponsored by specific organizations or join the program as self-sponsored students.
-
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-  </motion.section>
-
-      {/* Stakeholders Engagement Section with Modern Design */}
-      <motion.section
-        className={`relative py-32 overflow-hidden transition-colors duration-500 ${
-          theme === 'dark' 
-            ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900' 
-            : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
-        }`}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-center mb-16"
-            >
-              <div className={`inline-flex items-center gap-3 backdrop-blur-sm border rounded-full px-6 py-3 mb-8 transition-all duration-500 ${
-                theme === 'dark' 
-                  ? 'bg-white/10 border-white/20' 
-                  : 'bg-white/20 border-white/30'
-              }`}>
-                <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-                <Users className="w-4 h-4 text-purple-500" />
-                <span className={`font-medium transition-colors duration-500 ${
-                  theme === 'dark' ? 'text-purple-300' : 'text-purple-700'
-                }`}>Stakeholders Engagement</span>
-              </div>
-              
-              <h2 className={`text-4xl md:text-5xl font-black mb-6 leading-tight transition-colors duration-500 ${
-                theme === 'dark' ? 'text-white' : 'text-gray-900'
-              }`}>
-                <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  Stakeholders
-                </span>
-                <br />
-                <span className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>Engagement</span>
-              </h2>
-            </motion.div>
-            <div className="space-y-8">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                whileHover={{ 
-                  scale: 1.02, 
-                  y: -5,
-                  rotateX: 3,
-                  rotateY: 3,
-                  transition: { type: "spring", stiffness: 300, damping: 20 }
-                }}
-                className="perspective-1000"
-              >
-                <div className={`relative backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden group-hover:shadow-3xl transition-all duration-500 ${
-                  theme === 'dark' 
-                    ? 'bg-white/10 border-white/20' 
-                    : 'bg-white/20 border-white/30'
-                }`}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-indigo-500/10 group-hover:from-blue-500/20 group-hover:via-purple-500/20 group-hover:to-indigo-500/20 transition-all duration-500"></div>
-                  
-                  <div className="relative p-8">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                        <Globe className="w-8 h-8 text-white" />
-                      </div>
-                      <div>
-                        <h3 className={`text-2xl font-bold transition-colors duration-500 ${
-                          theme === 'dark' ? 'text-white' : 'text-gray-900'
-                        }`}>Government Ministries</h3>
-                        <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
-                      </div>
-                    </div>
-                    <p className={`text-lg leading-relaxed transition-colors duration-500 ${
-                      theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
-                    Relevant government ministries, such as, the Ministry of Education, Ministry of Innovation and Technology, Ethiopian Institute of Artificial Intelligence, Ethiopian Telecommunication are key stakeholders since their involvement is essential for aligning the project with national policies and priorities in psychosocial and in mental health services.
-                  </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                whileHover={{ 
-                  scale: 1.02, 
-                  y: -5,
-                  rotateX: -3,
-                  rotateY: -3,
-                  transition: { type: "spring", stiffness: 300, damping: 20 }
-                }}
-                className="perspective-1000"
-              >
-                <div className={`relative backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden group-hover:shadow-3xl transition-all duration-500 ${
-                  theme === 'dark' 
-                    ? 'bg-white/10 border-white/20' 
-                    : 'bg-white/20 border-white/30'
-                }`}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10 group-hover:from-green-500/20 group-hover:via-emerald-500/20 group-hover:to-teal-500/20 transition-all duration-500"></div>
-                  
-                  <div className="relative p-8">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
-                        <Award className="w-8 h-8 text-white" />
-                      </div>
-                      <div>
-                        <h3 className={`text-2xl font-bold transition-colors duration-500 ${
-                          theme === 'dark' ? 'text-white' : 'text-gray-900'
-                        }`}>Funding Agencies</h3>
-                        <div className="w-12 h-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full"></div>
-                      </div>
-                    </div>
-                    <p className={`text-lg leading-relaxed transition-colors duration-500 ${
-                      theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
-                      Organizations and institutions that provide financial support for the project are critical stakeholders. Their investment is necessary for the project's sustainability and growth, and their expectations must be considered in project planning and reporting.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                whileHover={{ 
-                  scale: 1.02, 
-                  y: -5,
-                  rotateX: 3,
-                  rotateY: -3,
-                  transition: { type: "spring", stiffness: 300, damping: 20 }
-                }}
-                className="perspective-1000"
-              >
-                <div className={`relative backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden group-hover:shadow-3xl transition-all duration-500 ${
-                  theme === 'dark' 
-                    ? 'bg-white/10 border-white/20' 
-                    : 'bg-white/20 border-white/30'
-                }`}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-rose-500/10 group-hover:from-purple-500/20 group-hover:via-pink-500/20 group-hover:to-rose-500/20 transition-all duration-500"></div>
-                  
-                  <div className="relative p-8">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg">
-                        <Users className="w-8 h-8 text-white" />
-                      </div>
-                      <div>
-                        <h3 className={`text-2xl font-bold transition-colors duration-500 ${
-                          theme === 'dark' ? 'text-white' : 'text-gray-900'
-                        }`}>Non-governmental Organizations</h3>
-                        <div className="w-12 h-1 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full"></div>
-                      </div>
-                    </div>
-                    <p className={`text-lg leading-relaxed transition-colors duration-500 ${
-                      theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
-                      NGOs that focus on psychosocial and in mental health services are important partners since their insights and collaboration can enhance the project's relevance and impact in addressing community needs.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                whileHover={{ 
-                  scale: 1.02, 
-                  y: -5,
-                  rotateX: -3,
-                  rotateY: 3,
-                  transition: { type: "spring", stiffness: 300, damping: 20 }
-                }}
-                className="perspective-1000"
-              >
-                <div className={`relative backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden group-hover:shadow-3xl transition-all duration-500 ${
-                  theme === 'dark' 
-                    ? 'bg-white/10 border-white/20' 
-                    : 'bg-white/20 border-white/30'
-                }`}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-blue-500/10 to-cyan-500/10 group-hover:from-indigo-500/20 group-hover:via-blue-500/20 group-hover:to-cyan-500/20 transition-all duration-500"></div>
-                  
-                  <div className="relative p-8">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg">
-                        <Shield className="w-8 h-8 text-white" />
-                      </div>
-                      <div>
-                        <h3 className={`text-2xl font-bold transition-colors duration-500 ${
-                          theme === 'dark' ? 'text-white' : 'text-gray-900'
-                        }`}>For Policymakers</h3>
-                        <div className="w-12 h-1 bg-gradient-to-r from-indigo-500 to-cyan-600 rounded-full"></div>
-                      </div>
-                    </div>
-                    <p className={`text-lg leading-relaxed transition-colors duration-500 ${
-                      theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
-                      Access reliable data for educational planning and policy development, monitor system-wide performance, and ensure accountability in the education sector.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-  </motion.section>
-
-      {/* Project Goal with Modern Design */}
-      <motion.section
-        className={`relative py-32 overflow-hidden transition-colors duration-500 ${
-          theme === 'dark' 
-            ? 'bg-gradient-to-br from-gray-800 via-blue-900 to-indigo-900' 
-            : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
-        }`}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="group"
-            >
-              {/* Glassmorphism card */}
-              <div className={`relative backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden group-hover:shadow-3xl transition-all duration-500 ${
-                theme === 'dark' 
-                  ? 'bg-white/10 border-white/20' 
-                  : 'bg-white/20 border-white/30'
-              }`}>
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-indigo-500/5 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-indigo-500/10 transition-all duration-500"></div>
-                
-                <div className="relative p-8 md:p-12">
-                  {/* Header with modern styling */}
-                  <div className="text-center mb-12">
-                    <div className={`inline-flex items-center gap-3 backdrop-blur-sm border rounded-full px-6 py-3 mb-8 transition-all duration-500 ${
-                      theme === 'dark' 
-                        ? 'bg-white/20 border-white/30' 
-                        : 'bg-white/30 border-white/40'
-                    }`}>
-                      <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                      <Target className="w-4 h-4 text-orange-500" />
-                      <span className={`font-medium transition-colors duration-500 ${
-                        theme === 'dark' ? 'text-orange-300' : 'text-orange-700'
-                      }`}>Project Goal</span>
-                    </div>
-                    
-                    <h2 className={`text-4xl md:text-5xl font-black mb-6 leading-tight transition-colors duration-500 ${
-                      theme === 'dark' ? 'text-white' : 'text-gray-900'
-                    }`}>
-                      <span className="bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent">
-                        Our Project Goal
-                      </span>
-                    </h2>
-                  </div>
-                  
-                  {/* Content with modern typography */}
-                  <div className="prose prose-lg max-w-none">
-                    <p className={`text-xl leading-relaxed font-medium transition-colors duration-500 ${
-                      theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
-              The goal of this project is to establish a five-year graduate-level program in Psychosocial Software Engineering Program in Addis Ababa University and train 100 students as the first generation of Psychosocial Software Engineers that fosters innovation at the intersection of mental health, social work, and technology.
-            </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-  </motion.section>
-
-      <SiteFooter />
-    </div>
-  )
-}
-
-                  </Table>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-
-            <div className="flex gap-4">
-
-              <div className="flex-shrink-0">
-
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center">
-
-                </div>
-
-              </div>
-
-              <div>
-
-                {/* <div className="mt-6 mb-8 md:mb-0">
-
-                  <h4 className="text-lg font-semibold text-gray-900 mb-3">List of available staff, their location and academic rank</h4>
-
-                  <Table className="text-sm">
-
-                    <TableHeader className="bg-gray-50">
-
-                      <TableRow>
-
-                        <TableHead className="w-[35%]">Name</TableHead>
-
-                        <TableHead className="w-[45%]">Location</TableHead>
-
-                        <TableHead className="w-[20%] text-right">Academic rank</TableHead>
-
-                      </TableRow>
-
-                    </TableHeader>
-
-                    <TableBody>
-
-                      <TableRow>
-
-                        <TableCell>Abebe Assefa</TableCell>
-
-                        <TableCell>School of Social Work</TableCell>
-
-                        <TableCell className="text-right">Assistant Professor</TableCell>
-
-                      </TableRow>
-
-                      <TableRow>
-
-                        <TableCell>Abreham Tarekegn</TableCell>
-
-                        <TableCell>School of Psychology</TableCell>
-
-                        <TableCell className="text-right">PhD Candidate</TableCell>
-
-                      </TableRow>
-
-                      <TableRow>
-
-                        <TableCell>Ashenafi Hagos</TableCell>
-
-                        <TableCell>School of Social Work</TableCell>
-
-                        <TableCell className="text-right">Associate Professor</TableCell>
-
-                      </TableRow>
-
-                      <TableRow>
-
-                        <TableCell>Beakal Gizachew</TableCell>
-
-                        <TableCell>School of Information Technology Engineering</TableCell>
-
-                        <TableCell className="text-right">Assistant Professor</TableCell>
-
-                      </TableRow>
-
-                      <TableRow>
-
-                        <TableCell>Daniel Tefera</TableCell>
-
-                        <TableCell>School of Psychology</TableCell>
-
-                        <TableCell className="text-right">Associate Professor</TableCell>
-
-                      </TableRow>
-
-                      <TableRow>
-
-                        <TableCell>Fantahun Bogale</TableCell>
-
-                        <TableCell>School of Information Technology Engineering</TableCell>
-
-                        <TableCell className="text-right">Assistant Professor</TableCell>
-
-                      </TableRow>
-
-                      <TableRow>
-
-                        <TableCell>Mengistu Legesse</TableCell>
-
-                        <TableCell>School of Social Work</TableCell>
-
-                        <TableCell className="text-right">Assistant Professor</TableCell>
-
-                      </TableRow>
-
-                      <TableRow>
-
-                        <TableCell>Mesele Mengsteab</TableCell>
-
-                        <TableCell>School of Social Work</TableCell>
-
-                        <TableCell className="text-right">Assistant Professor</TableCell>
-
-                      </TableRow>
-
-                      <TableRow>
-
-                        <TableCell>Wassie Kebede</TableCell>
-
-                        <TableCell>School of Social Work</TableCell>
-
-                        <TableCell className="text-right">Professor</TableCell>
-
-                      </TableRow>
-
-                    </TableBody>
-
-                    <TableCaption>Program faculty and contributing academic staff</TableCaption>
-
-                  </Table>
-
-                </div> */}
-
-                
-
-                
-
-              </div>
-
-            </div>
-
-
-
-            <div className="flex gap-4">
-
-              <div className="flex-shrink-0">
-
-                <div className="w-12 h-12  rounded-lg flex items-center justify-center">
-
-                  
-
-                </div>
-
-              </div>
-
-              <div>
-
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Facilities</h3>
                 <p className="text-gray-700 leading-relaxed">
                   The program will be equipped with administrative office, classroom, and laboratory facilities to support teaching, research, and program administration.
-
                 </p>
-
                 <ul className="mt-3 list-disc pl-6 text-gray-700 space-y-2">
                   <li>
-
                     <strong>Administrative Office:</strong> Equipped as per the specification in the project proposal (see Annex B for details).
                   </li>
-
                   <li>
-
                     <strong>Classrooms:</strong> Equipped with inputs as per the specifications in the project proposal (see Annex C for details).
                   </li>
-
                   <li>
-
                     <strong>Technical Software Engineering Laboratory:</strong> Equipped with the necessary inputs as per the specification in the project proposal (see Annex D for details).
                   </li>
-
                   <li>
-
                     <strong>Psychosocial Software Engineering Laboratory:</strong> Equipped with the necessary inputs as per the specification in the project proposal (see Annex E for details).
                   </li>
-
                 </ul>
-
               </div>
-
             </div>
 
-
-
             <div className="flex gap-4">
-
               <div className="flex-shrink-0">
-
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center">
-
                  
-
                 </div>
-
               </div>
-
               <div>
-
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Financial Resources</h3>
                 <p className="text-gray-700 leading-relaxed">
                  The program is funded by outside sources. Students’ tuition fees will be fully covered by the program through external funding. In the future, students might be sponsored by specific organizations or join the program as self-sponsored students.
 
-
-
                 </p>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
-
   </motion.section>
-
-
 
       {/* Benefits Section with Animation */}
       <motion.section
-
         className="bg-blue-50 py-16"
         initial={{ opacity: 0, y: 40 }}
-
         whileInView={{ opacity: 1, y: 0 }}
-
         viewport={{ once: true, amount: 0.2 }}
-
         transition={{ duration: 0.8, ease: "easeOut" }}
-
       >
-
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Stakeholders Engagement</h2>
             <div className="space-y-6">
               <Card>
@@ -966,9 +423,7 @@ export default function AboutItemBankPage() {
                 <CardContent>
                   <p className="text-gray-700 leading-relaxed">
                     Relevant government ministries, such as, the Ministry of Education, Ministry of Innovation and Technology, Ethiopian Institute of Artificial Intelligence, Ethiopian Telecommunication are key stakeholders since their involvement is essential for aligning the project with national policies and priorities in psychosocial and in mental health services.
-
                   </p>
-
                 </CardContent>
               </Card>
 
@@ -1006,50 +461,29 @@ export default function AboutItemBankPage() {
                 </CardContent>
               </Card>
             </div>
-
           </div>
-
         </div>
-
   </motion.section>
-
-
 
       {/* Goal Process with Animation */}
       <motion.section
-
         className="container mx-auto px-4 py-16"
         initial={{ opacity: 0, y: 40 }}
-
         whileInView={{ opacity: 1, y: 0 }}
-
         viewport={{ once: true, amount: 0.2 }}
-
         transition={{ duration: 0.8, ease: "easeOut" }}
-
       >
-
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Project Goal</h2>
           <div className="space-y-6">
             <p className="text-gray-700 leading-relaxed">
               The goal of this project is to establish a five-year graduate-level program in Psychosocial Software Engineering Program in Addis Ababa University and train 100 students as the first generation of Psychosocial Software Engineers that fosters innovation at the intersection of mental health, social work, and technology.
-
             </p>
-
           </div>
-
         </div>
-
   </motion.section>
 
-
-
       <SiteFooter />
-
     </div>
-
   )
-
 }
-

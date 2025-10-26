@@ -51,9 +51,8 @@ export function StakeholdersContent() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Governmental</h2>
           <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12" variants={containerVariants}>
-<<<<<<< HEAD
             <motion.div 
-              className=" perspective-1000 flex flex-col items-center" 
+              className="flex flex-col items-center" 
               variants={itemVariants}
               whileHover={{ 
                 scale: 1.05, 
@@ -62,7 +61,7 @@ export function StakeholdersContent() {
                 rotateY: 5,
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
-              
+              className="perspective-1000"
             >
               <motion.div 
                 className={`relative w-32 h-32 mb-4 backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
@@ -78,10 +77,6 @@ export function StakeholdersContent() {
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-indigo-500/10"></div>
-=======
-            <motion.div className="flex flex-col items-center" variants={itemVariants}>
-              <motion.div className="relative w-32 h-32 mb-4" whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 400, damping: 18 }}>
->>>>>>> parent of 07f6046 (Merge pull request #1 from Abel9436/main)
                 <Image 
                   src="/New folder/Ministry_of_Education_(Ethiopia).png" 
                   alt="Ministry of Education Ethiopia"
@@ -92,9 +87,8 @@ export function StakeholdersContent() {
               <p className="text-sm font-medium text-gray-700">Ministry of Education</p>
             </motion.div>
             
-<<<<<<< HEAD
             <motion.div 
-              className="perspective-1000 flex flex-col items-center" 
+              className="flex flex-col items-center" 
               variants={itemVariants}
               whileHover={{ 
                 scale: 1.05, 
@@ -103,7 +97,7 @@ export function StakeholdersContent() {
                 rotateY: -5,
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
-              
+              className="perspective-1000"
             >
               <motion.div 
                 className={`relative w-32 h-32 mb-4 backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
@@ -119,10 +113,6 @@ export function StakeholdersContent() {
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10"></div>
-=======
-            <motion.div className="flex flex-col items-center" variants={itemVariants}>
-              <motion.div className="relative w-32 h-32 mb-4" whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 400, damping: 18 }}>
->>>>>>> parent of 07f6046 (Merge pull request #1 from Abel9436/main)
                 <Image 
                   src="/New folder/Ministry_of_Innovation_and_Technology_(Ethiopia).png" 
                   alt="Ministry of Innovation and Technology Ethiopia"
@@ -133,9 +123,8 @@ export function StakeholdersContent() {
               <p className="text-sm font-medium text-gray-700">Ministry of Innovation & Technology</p>
             </motion.div>
             
-<<<<<<< HEAD
             <motion.div 
-              className="perspective-1000 flex flex-col items-center" 
+              className="flex flex-col items-center" 
               variants={itemVariants}
               whileHover={{ 
                 scale: 1.05, 
@@ -144,7 +133,7 @@ export function StakeholdersContent() {
                 rotateY: -5,
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
-             
+              className="perspective-1000"
             >
               <motion.div 
                 className={`relative w-32 h-32 mb-4 backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
@@ -160,10 +149,6 @@ export function StakeholdersContent() {
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-rose-500/10"></div>
-=======
-            <motion.div className="flex flex-col items-center" variants={itemVariants}>
-              <motion.div className="relative w-32 h-32 mb-4" whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 400, damping: 18 }}>
->>>>>>> parent of 07f6046 (Merge pull request #1 from Abel9436/main)
                 <Image 
                   src="/New folder/Ethiopian Artificial Intelegence Institute.png" 
                   alt="Ethiopian Artificial Intelligence Institute"
@@ -174,9 +159,8 @@ export function StakeholdersContent() {
               <p className="text-sm font-medium text-gray-700">Ethiopian AI Institute</p>
             </motion.div>
             
-<<<<<<< HEAD
             <motion.div 
-              className="perspective-1000 flex flex-col items-center" 
+              className="flex flex-col items-center" 
               variants={itemVariants}
               whileHover={{ 
                 scale: 1.05, 
@@ -185,7 +169,7 @@ export function StakeholdersContent() {
                 rotateY: 5,
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
-              
+              className="perspective-1000"
             >
               <motion.div 
                 className={`relative w-32 h-32 mb-4 backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
@@ -201,10 +185,6 @@ export function StakeholdersContent() {
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-blue-500/10 to-cyan-500/10"></div>
-=======
-            <motion.div className="flex flex-col items-center" variants={itemVariants}>
-              <motion.div className="relative w-32 h-32 mb-4" whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 400, damping: 18 }}>
->>>>>>> parent of 07f6046 (Merge pull request #1 from Abel9436/main)
                 <Image 
                   src="/New folder/Ethio Telecom.png" 
                   alt="Ethio Telecom"

@@ -21,7 +21,7 @@ export default function AboutItemBankPage() {
         transition={{ duration: 0.6 }}
       >
         <Image
-          src="/New folder/brain.jpg"
+          src="/New folder/AAUgate.jpg"
           alt="Background"
           fill
           className="object-cover opacity-20"

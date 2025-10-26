@@ -45,7 +45,7 @@ export default function HomePage() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <Image
-          src="/New folder/brain.jpg"
+          src="/New folder/AAUgate.jpg"
           alt="Background"
           fill
           className="object-cover opacity-20"
@@ -196,12 +196,10 @@ export default function HomePage() {
       >
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Creaters of this program</h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Simple, efficient process from item selection to psychometric insights
-            </p>
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Who created this program?</h3>
+           
           </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <motion.div 
               className="text-center"
               initial={{ opacity: 0, y: 30 }}
@@ -212,9 +210,9 @@ export default function HomePage() {
               <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                 1
               </div>
-              <h4 className="text-xl font-semibold text-gray-900 mb-3">Select Test Items</h4>
+              <h4 className="text-xl font-semibold text-gray-900 mb-3">School of Social Work</h4>
               <p className="text-gray-600 leading-relaxed">
-                Browse and select from our extensive database of validated test items tailored to your needs
+               College of Social Sciences, Arts and Humanities
               </p>
             </motion.div>
             <motion.div 
@@ -227,26 +225,24 @@ export default function HomePage() {
               <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                 2
               </div>
-              <h4 className="text-xl font-semibold text-gray-900 mb-3">Generate Test</h4>
+              <h4 className="text-xl font-semibold text-gray-900 mb-3">School of Information Technology Engineering</h4>
               <p className="text-gray-600 leading-relaxed">
-                Automatically create assessments for placement, formative, diagnostic, or evaluative purposes
+                College of Technology and Built Environment
               </p>
             </motion.div>
-            <motion.div 
-              className="text-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                3
+          </div>
+          <div className="flex justify-center items-center mt-12">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Addis Ababa University</h3>
+              <div className="relative w-48 h-48 mx-auto">
+                <Image
+                  src="/New folder/AAUlogo.png"
+                  alt="Addis Ababa University Logo"
+                  fill
+                  className="object-contain mix-blend-multiply"
+                />
               </div>
-              <h4 className="text-xl font-semibold text-gray-900 mb-3">Analyze Results</h4>
-              <p className="text-gray-600 leading-relaxed">
-                Gain valuable psychometric insights and data-driven analysis to improve learning outcomes
-              </p>
-            </motion.div>
+            </div>
           </div>
         </div>
       </motion.section>
@@ -333,9 +329,9 @@ export default function HomePage() {
       {!currentUser && (
         <section className="bg-blue-600 text-white py-20">
           <div className="container mx-auto px-4 text-center">
-            <h3 className="text-3xl font-bold mb-4">Ready to Transform Your Assessments?</h3>
+            <h3 className="text-3xl font-bold mb-4">Ready to Engineer Human Well-being?</h3>
             <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
-              Join educators across Ethiopia in using data-driven insights to improve learning outcomes
+              Become part of a new generation of professionals blending psychosocial insight with technology to create digital systems that care, connect, and empower communities.
             </p>
             <Button size="lg" variant="secondary" className="text-base" onClick={() => setAuthModalOpen(true)}>
               Sign Up / Login

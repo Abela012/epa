@@ -23,7 +23,7 @@ export function StakeholdersContent() {
       {/* Hero Section */}
       <section className="relative bg-gray-900 text-white py-20 overflow-hidden">
         <Image
-          src="/New folder/brain.jpg"
+          src="/New folder/AAUgate.jpg"
           alt="Background"
           fill
           className="object-cover opacity-20"

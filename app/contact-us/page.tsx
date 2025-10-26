@@ -54,7 +54,7 @@ export default function ContactUsPage() {
       {/* Hero Section */}
       <section className="relative bg-gray-900 text-white py-20 overflow-hidden">
         <Image
-          src="/New folder/brain.jpg"
+          src="/New folder/AAUgate.jpg"
           alt="Background"
           fill
           className="object-cover opacity-20"
@@ -91,7 +91,7 @@ export default function ContactUsPage() {
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">Office Address</h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Ethiopian Psychosocial Association
+                        Addis Ababa University
                         <br />
                         Addis Ababa, Ethiopia
                         <br />
@@ -112,8 +112,8 @@ export default function ContactUsPage() {
                       <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
                       <p className="text-gray-700">
                         General Inquiries:{" "}
-                        <a href="mailto:info@epaitembank.com" className="text-blue-600 hover:underline">
-                          info@epaitembank.com
+                        <a href="mailto:info@eps.org" className="text-blue-600 hover:underline">
+                          info@eps.org
                         </a>
                       </p>
                       <p className="text-gray-700">

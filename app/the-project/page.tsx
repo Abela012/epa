@@ -29,7 +29,7 @@ export default function TheProjectPage() {
         {/* Hero Section */}
         <section className="relative bg-gray-900 text-white py-16 overflow-hidden">
           <Image 
-            src="/New folder/brain.jpg" 
+            src="/New folder/AAUgate.jpg" 
             alt="Brain background"
             fill
             className="object-cover opacity-20"
@@ -39,8 +39,7 @@ export default function TheProjectPage() {
             <div className="max-w-3xl">
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">The Project</h1>
               <p className="text-xl text-blue-100 text-pretty">
-                Comprehensive information about the EPA Item Bank project, its objectives, methodology, and impact on
-                Ethiopian education.
+                The Master of Social Work in Psychosocial Software Engineering (MSW-PSE) is a groundbreaking interdisciplinary program that bridges technology and human-centered design to redefine how digital systems serve society.
               </p>
             </div>
           </div>

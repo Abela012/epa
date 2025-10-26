@@ -43,15 +43,15 @@ export function SiteFooter() {
                   className="object-cover"
                 />
               </div>
-              <span className="font-bold text-white">Master of Social Work in Psychosocial Software Engineering</span>
+              <span className=" text-white">Master of Social Work in Psychosocial Software Engineering</span>
             </motion.div>
             <p className="text-sm leading-relaxed">
-              Developed by the collaboration of School of Social Work under College of Social Science, Arts and Humanities and School of Information Technology and Engineering (SiTE) under College of Technology and Built Environment @ Addis Ababa University.
+              Developed by the collaboration of School of Social Work, Arts and Humanities and School of Information Technology and Engineering (SiTE) @ Addis Ababa University.
             </p>
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <h4 className="font-semibold text-white mb-3">Quick Links</h4>
+            <h4 className=" text-white mb-3">Quick Links</h4>
             <ul className="space-y-1.5 text-sm">
               <motion.li whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                 <Link href="/" className="hover:text-white transition-colors">
@@ -77,7 +77,7 @@ export function SiteFooter() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <h4 className="font-semibold text-white mb-3">Resources</h4>
+            <h4 className=" text-white mb-3">Resources</h4>
             <ul className="space-y-1.5 text-sm">
               <motion.li whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                 <Link href="/news-and-events" className="hover:text-white transition-colors">
@@ -93,16 +93,16 @@ export function SiteFooter() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <h4 className="font-semibold text-white mb-3">Contact</h4>
+            <h4 className=" text-white mb-3">Contact</h4>
             <ul className="space-y-2 text-sm">
               <motion.li className="flex items-start gap-2" whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>Ethiopian Psychosocial Association, Addis Ababa, Ethiopia</span>
+                <span>Addis Ababa University, Addis Ababa, Ethiopia</span>
               </motion.li>
               <motion.li className="flex items-center gap-2" whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                 <Mail className="w-4 h-4 flex-shrink-0" />
                 <a href="mailto:info@epaitembank.com" className="hover:text-white transition-colors">
-                  info@AAU.com
+                  info@pse.org
                 </a>
               </motion.li>
               <motion.li className="flex items-center gap-2" whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>

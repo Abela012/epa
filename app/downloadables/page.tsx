@@ -57,7 +57,7 @@ export default function DownloadablesPage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">Downloadables</h1>
             <p className="text-xl text-blue-100 leading-relaxed">
               Access user guides, technical documentation, training materials, templates, and more to help you make the
-              most of the EPA Item Bank
+              most of the Master of Social Work in Psychosocial Software Engineering
             </p>
           </div>
         </div>

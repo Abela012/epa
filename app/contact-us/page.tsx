@@ -161,7 +161,7 @@ export default function ContactUsPage() {
           </div>
 
           {/* Contact Form */}
-          <div>
+          {/* <div>
             <Card className="border-2">
               <CardHeader>
                 <CardTitle className="text-2xl">Send Us a Message</CardTitle>
@@ -226,7 +226,7 @@ export default function ContactUsPage() {
                 </form>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
         </div>
       </section>
 

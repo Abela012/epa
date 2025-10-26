@@ -54,11 +54,10 @@ export default function HomePage() {
         <div className="container mx-auto px-4 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-5xl font-bold text-white mb-6 text-balance">
-            Revolutionizing Educational Assessments with Data-Driven Insights
+           Where psychology, social work, and software engineering unite to advance human well-being
           </h2>
           <p className="text-xl text-blue-100 mb-8 text-pretty leading-relaxed">
-            A multi-purpose  Psychosocial Software Engineering providing high-quality, validated test items for the Ethiopian education
-            system
+            Bridging empathy and technology, the MSW-PSE program empowers a new generation of professionals to design digital systems that understand people—not just process them. It’s where human insight meets software innovation for a more inclusive and mentally resilient digital world.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.button
@@ -95,7 +94,7 @@ export default function HomePage() {
         <div className="text-center mb-12">
           <h3 className="text-3xl font-bold text-gray-900 mb-4">Why Choose the Master of Social Work in Psychosocial Software Engineering?</h3>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Our platform ensures quality assessments and promotes resource efficiency across the education system
+           The MSW-PSE program pioneers a new academic frontier where psychology, social work, and software engineering converge to create ethical, inclusive, and human-centered technologies that advance mental health, social equity, and community well-being.
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -104,19 +103,18 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            whileHover={{ scale: 1.08, zIndex: 2, boxShadow: "0 8px 32px rgba(0,0,0,0.18)" }}
-            style={{ zIndex: 1 }}
+            whileHover={{ scale: 1.04 }}
           >
             <Card className="border-2 hover:border-blue-600 transition-colors">
               <CardHeader>
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <CheckCircle2 className="w-6 h-6 text-blue-600" />
+                 
                 </div>
-                <CardTitle className="text-xl">Quality Assessments</CardTitle>
+                <CardTitle className="text-xl">Interdisciplinary Innovation for Human Well-being</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base leading-relaxed">
-                  High-quality, validated test items ensure accurate and reliable educational assessments
+                 This program is the first of its kind to unite psychology, social work, and software engineering, training professionals who design ethical, inclusive, and human-centered digital systems. It bridges technology with empathy — ensuring that digital tools enhance mental health, social equity, and community well-being rather than merely optimizing efficiency.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -127,19 +125,17 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            whileHover={{ scale: 1.08, zIndex: 2, boxShadow: "0 8px 32px rgba(0,0,0,0.18)" }}
-            style={{ zIndex: 1 }}
+            whileHover={{ scale: 1.04 }}
           >
             <Card className="border-2 hover:border-blue-600 transition-colors">
               <CardHeader>
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                  <Database className="w-6 h-6 text-green-600" />
                 </div>
-                <CardTitle className="text-xl">Resource Efficiency</CardTitle>
+                <CardTitle className="text-xl"> Career-Ready Skills for a Digital Care Economy</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base leading-relaxed">
-                  Centralized platform reduces duplication and maximizes resource utilization
+                  Graduates gain both technical mastery (AI, mobile and web app development, cloud computing, cybersecurity) and psychosocial insight (behavioral analysis, ethical auditing, participatory design). This dual skill set prepares them for emerging global roles such as mental health tech developer, digital ethics specialist, or social innovation architect.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -150,19 +146,17 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            whileHover={{ scale: 1.08, zIndex: 2, boxShadow: "0 8px 32px rgba(0,0,0,0.18)" }}
-            style={{ zIndex: 1 }}
+            whileHover={{ scale: 1.04 }}
           >
             <Card className="border-2 hover:border-blue-600 transition-colors">
               <CardHeader>
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <TrendingUp className="w-6 h-6 text-purple-600" />
                 </div>
-                <CardTitle className="text-xl">Continuous Improvement</CardTitle>
+                <CardTitle className="text-xl">National and Global Relevance</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base leading-relaxed">
-                  Regular updates and psychometric analysis support ongoing enhancement
+                 The program was developed through national stakeholder workshops and needs assessments involving government, NGOs, and tech industries (e.g., Ethio-Telecom, UNICEF, Africa CDC). It responds to the rising demand for digital mental health interventions and data ethics in Africa, positioning graduates as pioneers in a globally relevant, socially impactful field.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -173,19 +167,17 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            whileHover={{ scale: 1.08, zIndex: 2, boxShadow: "0 8px 32px rgba(0,0,0,0.18)" }}
-            style={{ zIndex: 1 }}
+            whileHover={{ scale: 1.04 }}
           >
             <Card className="border-2 hover:border-blue-600 transition-colors">
               <CardHeader>
                 <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-                  <BookOpen className="w-6 h-6 text-orange-600" />
                 </div>
-                <CardTitle className="text-xl">Enhanced Accessibility</CardTitle>
+                <CardTitle className="text-xl"> Commitment to Quality, Ethics, and Real-World Impact</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base leading-relaxed">
-                  Easy access to quality assessment tools for educators nationwide
+                 Structured under the Bologna Process and European Standards for Quality Assurance, the MSW-PSE emphasizes evidence-based learning, ethical compliance, and community engagement. Through a 30-ECTS Capstone Project, students collaborate with industry or social service organizations to build real digital solutions addressing mental health and social care challenges.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -204,7 +196,7 @@ export default function HomePage() {
       >
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">How It Works</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Creaters of this program</h3>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Simple, efficient process from item selection to psychometric insights
             </p>

@@ -4,17 +4,13 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Target, Calendar, Users, Lightbulb, TrendingUp, FileText, CheckCircle2, Clock, Award, Sparkles, Zap, Rocket, BarChart3, Shield, ArrowRight, Globe, BookOpen } from "lucide-react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { Target, Calendar, Users, Lightbulb, TrendingUp, FileText, CheckCircle2, Clock, Award } from "lucide-react"
+import { motion } from "framer-motion"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { useTheme } from "next-themes"
 
 export default function TheProjectPage() {
-  const { theme } = useTheme()
-  const { scrollYProgress } = useScroll()
-  const y = useTransform(scrollYProgress, [0, 1], [0, -50])
   const searchParams = useSearchParams()
   const tabParam = searchParams?.get('tab')
   const [activeTab, setActiveTab] = useState(tabParam || "overview")
@@ -26,286 +22,72 @@ export default function TheProjectPage() {
   }, [tabParam])
 
   return (
-    <div className={`min-h-screen flex flex-col transition-colors duration-500 ${
-      theme === 'dark' 
-        ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900' 
-        : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
-    }`}>
+    <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
       <main className="flex-1">
-        {/* Enhanced Hero Section with 3D Design */}
-        <motion.section 
-          className="relative min-h-screen flex items-center justify-center overflow-hidden"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Enhanced animated background elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <motion.div 
-              style={{ y }}
-              className={`absolute -top-40 -right-40 w-80 h-80 rounded-full mix-blend-multiply filter blur-xl animate-pulse ${
-                theme === 'dark' ? 'bg-blue-500 opacity-30' : 'bg-blue-400 opacity-20'
-              }`}
-            ></motion.div>
-            <motion.div 
-              style={{ y: useTransform(scrollYProgress, [0, 1], [0, 50]) }}
-              className={`absolute -bottom-40 -left-40 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000 ${
-                theme === 'dark' ? 'bg-purple-500 opacity-25' : 'bg-purple-400 opacity-15'
-              }`}
-            ></motion.div>
-            <motion.div 
-              style={{ y: useTransform(scrollYProgress, [0, 1], [0, -30]) }}
-              className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000 ${
-                theme === 'dark' ? 'bg-indigo-500 opacity-20' : 'bg-indigo-400 opacity-10'
-              }`}
-            ></motion.div>
-          </div>
-          
+        {/* Hero Section */}
+        <section className="relative bg-gray-900 text-white py-16 overflow-hidden">
           <Image 
             src="/New folder/brain.jpg" 
             alt="Brain background"
             fill
-            className={`object-cover transition-opacity duration-500 ${
-              theme === 'dark' ? 'opacity-20' : 'opacity-10'
-            }`}
+            className="object-cover opacity-20"
             priority
           />
-          
-          {/* Glassmorphism overlay */}
-          <div className={`absolute inset-0 backdrop-blur-sm transition-all duration-500 ${
-            theme === 'dark' 
-              ? 'bg-gradient-to-br from-gray-900/40 via-blue-900/30 to-indigo-900/40' 
-              : 'bg-gradient-to-br from-blue-900/20 via-indigo-900/30 to-purple-900/20'
-          }`}></div>
-          
           <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-6xl mx-auto text-center">
-              {/* Enhanced floating badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -5,
-                  rotateX: 5,
-                  rotateY: 5,
-                  transition: { type: "spring", stiffness: 300, damping: 20 }
-                }}
-                className="perspective-1000"
-              >
-                <div className={`inline-flex items-center gap-3 backdrop-blur-md border rounded-full px-8 py-4 mb-8 transition-all duration-500 shadow-lg hover:shadow-2xl ${
-                  theme === 'dark' 
-                    ? 'bg-white/10 border-white/20 hover:bg-white/15' 
-                    : 'bg-white/20 border-white/30 hover:bg-white/25'
-                }`}>
-                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
-                  <Sparkles className="w-5 h-5 text-green-400" />
-                  <span className={`font-semibold text-lg transition-colors duration-500 ${
-                    theme === 'dark' ? 'text-white/90' : 'text-white/90'
-                  }`}>The Project</span>
-                </div>
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                whileHover={{ 
-                  scale: 1.02,
-                  transition: { type: "spring", stiffness: 300, damping: 20 }
-                }}
-                className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight perspective-1000"
-              >
-                <motion.span 
-                  className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
-                  whileHover={{ 
-                    rotateX: 5,
-                    rotateY: 5,
-                    transition: { type: "spring", stiffness: 300, damping: 20 }
-                  }}
-                >
-                  The Project
-                </motion.span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                whileHover={{ 
-                  scale: 1.01,
-                  transition: { type: "spring", stiffness: 300, damping: 20 }
-                }}
-                className="text-xl md:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto leading-relaxed perspective-1000"
-              >
+            <div className="max-w-3xl">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">The Project</h1>
+              <p className="text-xl text-blue-100 text-pretty">
                 Comprehensive information about the EPA Item Bank project, its objectives, methodology, and impact on
-                <motion.span 
-                  className="font-semibold text-white"
-                  whileHover={{ 
-                    rotateX: 2,
-                    rotateY: 2,
-                    transition: { type: "spring", stiffness: 300, damping: 20 }
-                  }}
-                >
-                  {" "}Ethiopian education{" "}
-                </motion.span>
-              </motion.p>
+                Ethiopian education.
+              </p>
             </div>
           </div>
-        </motion.section>
+        </section>
 
-        {/* Enhanced Tabbed Content Section */}
-        <motion.section 
-          className={`relative py-32 overflow-hidden transition-colors duration-500 ${
-            theme === 'dark' 
-              ? 'bg-gradient-to-br from-gray-800 via-blue-900 to-indigo-900' 
-              : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
-          }`}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          {/* Animated background elements */}
-          <div className="absolute inset-0">
-            <motion.div 
-              style={{ y }}
-              className={`absolute top-20 right-20 w-40 h-40 rounded-full blur-3xl animate-pulse ${
-                theme === 'dark' ? 'bg-blue-500/20' : 'bg-blue-300/20'
-              }`}
-            />
-            <motion.div 
-              style={{ y: useTransform(scrollYProgress, [0, 1], [0, 30]) }}
-              className={`absolute bottom-20 left-20 w-32 h-32 rounded-full blur-3xl animate-pulse delay-1000 ${
-                theme === 'dark' ? 'bg-purple-500/20' : 'bg-purple-300/20'
-              }`}
-            />
-          </div>
-          
-          <div className="container mx-auto px-4 relative z-10">
+        {/* Tabbed Content Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="mb-8"
-              >
-                <TabsList className={`grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto gap-2 backdrop-blur-xl border shadow-2xl transition-all duration-500 ${
-                  theme === 'dark' 
-                    ? 'bg-white/10 border-white/20' 
-                    : 'bg-white/20 border-white/30'
-                }`}>
-                <motion.div 
-                  whileHover={{ 
-                    scale: 1.05, 
-                    y: -3,
-                    rotateX: 5,
-                    rotateY: 5,
-                    transition: { type: "spring", stiffness: 300, damping: 20 }
-                  }}
-                  className="perspective-1000"
-                >
+              <TabsList className="ml-7 grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto gap-2 bg-transparent">
+                <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                   <TabsTrigger
                     value="overview"
-                    className={`data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer transition-all duration-300 ${
-                      theme === 'dark' 
-                        ? 'text-white hover:bg-white/10' 
-                        : 'text-gray-700 hover:bg-blue-50'
-                    }`}
+                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer"
                   >
-                    <FileText className="w-4 h-4 mr-2" />
                     Overview
                   </TabsTrigger>
                 </motion.div>
-                <motion.div 
-                  whileHover={{ 
-                    scale: 1.05, 
-                    y: -3,
-                    rotateX: -5,
-                    rotateY: -5,
-                    transition: { type: "spring", stiffness: 300, damping: 20 }
-                  }}
-                  className="perspective-1000"
-                >
+                <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                   <TabsTrigger
                     value="objectives"
-                    className={`data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer transition-all duration-300 ${
-                      theme === 'dark' 
-                        ? 'text-white hover:bg-white/10' 
-                        : 'text-gray-700 hover:bg-blue-50'
-                    }`}
+                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer"
                   >
-                    <Target className="w-4 h-4 mr-2" />
                     Objectives
                   </TabsTrigger>
                 </motion.div>
-                <motion.div 
-                  whileHover={{ 
-                    scale: 1.05, 
-                    y: -3,
-                    rotateX: 5,
-                    rotateY: -5,
-                    transition: { type: "spring", stiffness: 300, damping: 20 }
-                  }}
-                  className="perspective-1000"
-                >
+                <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                   <TabsTrigger
                     value="timeline"
-                    className={`data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer transition-all duration-300 ${
-                      theme === 'dark' 
-                        ? 'text-white hover:bg-white/10' 
-                        : 'text-gray-700 hover:bg-blue-50'
-                    }`}
+                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer"
                   >
-                    <Calendar className="w-4 h-4 mr-2" />
                     Timeline
                   </TabsTrigger>
                 </motion.div>
-                <motion.div 
-                  whileHover={{ 
-                    scale: 1.05, 
-                    y: -3,
-                    rotateX: -5,
-                    rotateY: 5,
-                    transition: { type: "spring", stiffness: 300, damping: 20 }
-                  }}
-                  className="perspective-1000"
-                >
+                <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                   <TabsTrigger
                     value="methodology"
-                    className={`data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer transition-all duration-300 ${
-                      theme === 'dark' 
-                        ? 'text-white hover:bg-white/10' 
-                        : 'text-gray-700 hover:bg-blue-50'
-                    }`}
+                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer"
                   >
-                    <Lightbulb className="w-4 h-4 mr-2" />
                     Purpose
                   </TabsTrigger>
                 </motion.div>
-                <motion.div 
-                  whileHover={{ 
-                    scale: 1.05, 
-                    y: -3,
-                    rotateX: 5,
-                    rotateY: 5,
-                    transition: { type: "spring", stiffness: 300, damping: 20 }
-                  }}
-                  className="perspective-1000"
-                >
+                <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                   <TabsTrigger 
                     value="team" 
-                    className={`data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer transition-all duration-300 ${
-                      theme === 'dark' 
-                        ? 'text-white hover:bg-white/10' 
-                        : 'text-gray-700 hover:bg-blue-50'
-                    }`}
+                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-blue-50 rounded-md cursor-pointer"
                   >
-                    <Users className="w-4 h-4 mr-2" />
                     Team
                   </TabsTrigger>
                 </motion.div>
@@ -313,159 +95,81 @@ export default function TheProjectPage() {
                   Impact
                 </TabsTrigger> */}
               </TabsList>
-              </motion.div>
 
-              {/* Enhanced Overview Tab */}
+              {/* Overview Tab */}
               <TabsContent value="overview" className="mt-8">
-                <div className="space-y-8">
+                <div className="space-y-6">
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    whileHover={{ 
-                      scale: 1.02, 
-                      y: -5,
-                      rotateX: 3,
-                      rotateY: 3,
-                      transition: { type: "spring", stiffness: 300, damping: 20 }
-                    }}
-                    className="perspective-1000"
                   >
-                    <div className={`relative backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
-                      theme === 'dark' 
-                        ? 'bg-white/10 border-white/20' 
-                        : 'bg-white/20 border-white/30'
-                    }`}>
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-indigo-500/5"></div>
-                      <div className="relative p-8">
-                        <div className="flex items-center gap-3 mb-6">
-                          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                            <FileText className="w-6 h-6 text-white" />
-                          </div>
-                          <h3 className={`text-2xl font-bold transition-colors duration-500 ${
-                            theme === 'dark' ? 'text-white' : 'text-gray-900'
-                          }`}>Project Overview</h3>
-                        </div>
-                        <p className={`text-lg leading-relaxed transition-colors duration-500 ${
-                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                        }`}>
-                          The "Master of Social Work in Psychosocial Software Engineering" program is a pioneering initiative designed to address the pressing need for digital solutions in psychosocial and mental health services within Ethiopia. This interdisciplinary program integrates principles from social work, psychology, and software engineering, equipping students with the necessary skills to develop innovative technology-driven interventions tailored to the unique challenges faced in the field.
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <FileText className="w-6 h-6 text-blue-600" />
+                          Project Overview
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <p className="text-gray-700 leading-relaxed">
+                          The “Master of Social Work in Psychosocial Software Engineering” program is a pioneering initiative designed to address the pressing need for digital solutions in psychosocial and mental health services within Ethiopia. This interdisciplinary program integrates principles from social work, psychology, and software engineering, equipping students with the necessary skills to develop innovative technology-driven interventions tailored to the unique challenges faced in the field.
                         </p>
-                      </div>
-                    </div>
+                      </CardContent>
+                    </Card>
                   </motion.div>
-                  <div className="grid md:grid-cols-3 gap-8">
+                  <div className="grid md:grid-cols-3 gap-6">
                     <motion.div
-                      initial={{ opacity: 0, x: -50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
-                      transition={{ duration: 0.6, delay: 0.2 }}
-                      whileHover={{ 
-                        scale: 1.05, 
-                        y: -10,
-                        rotateX: 5,
-                        rotateY: 5,
-                        transition: { type: "spring", stiffness: 300, damping: 20 }
-                      }}
-                      className="perspective-1000"
+                      transition={{ duration: 0.5, delay: 0, ease: "easeOut" }}
                     >
-                      <div className={`relative backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
-                        theme === 'dark' 
-                          ? 'bg-white/10 border-white/20' 
-                          : 'bg-white/20 border-white/30'
-                      }`}>
-                        <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10"></div>
-                        <div className="relative p-6">
-                          <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
-                              <Target className="w-5 h-5 text-white" />
-                            </div>
-                            <h4 className={`text-lg font-semibold transition-colors duration-500 ${
-                              theme === 'dark' ? 'text-white' : 'text-gray-900'
-                            }`}>Project Scope</h4>
-                          </div>
-                          <p className={`text-sm leading-relaxed transition-colors duration-500 ${
-                            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-                          }`}>
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="text-lg">Project Scope</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-gray-600">
                             All responsible parties engaged in the implementation of project, namely, the Team of Experts that independently created and developed the project; the School of Social Work, CSSAH, AAU, and School of Information Technology and Engineering, SITE, IT, AAU, stakeholders, funders, partners will be bound by the present Guideline following its endorsement.
                           </p>
-                        </div>
-                      </div>
+                        </CardContent>
+                      </Card>
                     </motion.div>
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
-                      transition={{ duration: 0.6, delay: 0.4 }}
-                      whileHover={{ 
-                        scale: 1.05, 
-                        y: -10,
-                        rotateX: -5,
-                        rotateY: -5,
-                        transition: { type: "spring", stiffness: 300, damping: 20 }
-                      }}
-                      className="perspective-1000"
+                      transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
                     >
-                      <div className={`relative backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
-                        theme === 'dark' 
-                          ? 'bg-white/10 border-white/20' 
-                          : 'bg-white/20 border-white/30'
-                      }`}>
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-indigo-500/10"></div>
-                        <div className="relative p-6">
-                          <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg">
-                              <Clock className="w-5 h-5 text-white" />
-                            </div>
-                            <h4 className={`text-lg font-semibold transition-colors duration-500 ${
-                              theme === 'dark' ? 'text-white' : 'text-gray-900'
-                            }`}>Duration</h4>
-                          </div>
-                          <p className={`text-sm leading-relaxed transition-colors duration-500 ${
-                            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-                          }`}>
-                            The Master of Social Work in Psychosocial Software Engineering [MSW-PSE] is a two-year, full-time program (120 ECTS[ In this program 1 European Credit Transfer and Accumulation System (ECTS) covers a total of 30 contact hours which translates to 0.625 Credit Hours.]) structured across four terms   to systematically integrate technical and psychosocial expertise.
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="text-lg">Duration</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-gray-600">
+                            The Master of Social Work in Psychosocial Software Engineering [MSW-PSE] is a two-year, full-time program (120 ECTS[ In this program 1 European Credit Transfer and Accumulation System (ECTS) covers a total of 30 contact hours which translates to 0.625 Credit Hours.]) structured across four terms   to systematically integrate technical and psychosocial expertise.
                           </p>
-                        </div>
-                      </div>
+                        </CardContent>
+                      </Card>
                     </motion.div>
                     <motion.div
-                      initial={{ opacity: 0, x: 50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
-                      transition={{ duration: 0.6, delay: 0.6 }}
-                      whileHover={{ 
-                        scale: 1.05, 
-                        y: -10,
-                        rotateX: 5,
-                        rotateY: -5,
-                        transition: { type: "spring", stiffness: 300, damping: 20 }
-                      }}
-                      className="perspective-1000"
+                      transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
                     >
-                      <div className={`relative backdrop-blur-xl rounded-3xl border shadow-2xl overflow-hidden transition-all duration-500 ${
-                        theme === 'dark' 
-                          ? 'bg-white/10 border-white/20' 
-                          : 'bg-white/20 border-white/30'
-                      }`}>
-                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-rose-500/10"></div>
-                        <div className="relative p-6">
-                          <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
-                              <Award className="w-5 h-5 text-white" />
-                            </div>
-                            <h4 className={`text-lg font-semibold transition-colors duration-500 ${
-                              theme === 'dark' ? 'text-white' : 'text-gray-900'
-                            }`}>Funding</h4>
-                          </div>
-                          <p className={`text-sm leading-relaxed transition-colors duration-500 ${
-                            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-                          }`}>
-                            The program is funded by outside sources. Students' tuition fees will be fully covered by the program through external funding. In the future, students might be sponsored by specific organizations or join the program as self-sponsored students.
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="text-lg">Funding</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-gray-600">
+                            The program is funded by outside sources. Students’ tuition fees will be fully covered by the program through external funding. In the future, students might be sponsored by specific organizations or join the program as self-sponsored students.
                           </p>
-                        </div>
-                      </div>
+                        </CardContent>
+                      </Card>
                     </motion.div>
                   </div>
                 </div>
@@ -997,7 +701,7 @@ export default function TheProjectPage() {
               </TabsContent>
             </Tabs>
           </div>
-        </motion.section>
+        </section>
       </main>
 
       <SiteFooter />

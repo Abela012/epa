@@ -341,14 +341,14 @@ export function SiteHeader() {
                 className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                About Item Bank
+                About Us
               </Link>
               <Link
                 href="/stakeholders-and-partners"
                 className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Stakeholders & Partners
+                Stakeholders
               </Link>
               <Link
                 href="/downloadables"

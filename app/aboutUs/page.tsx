@@ -3,11 +3,45 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import Image from "next/image"
-import { Target, Eye, Award, Users, BookOpen, BarChart3, Shield } from "lucide-react"
+import { Target, Eye, Award, Users, BookOpen, BarChart3, Shield, Plus } from "lucide-react"
 import { motion } from "framer-motion"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { PostNewsModal } from "@/components/post-news-modal"
 
 export default function AboutItemBankPage() {
+  const [currentUser, setCurrentUser] = useState<{ name: string; isAdmin?: boolean } | null>(null)
+  const [postModalOpen, setPostModalOpen] = useState(false)
+
+  useEffect(() => {
+    let isMounted = true
+    const loadUser = async () => {
+      try {
+        const res = await fetch('/api/auth/me', { credentials: 'include' })
+        const data = await res.json()
+        if (isMounted) setCurrentUser(data.user)
+      } catch {}
+    }
+    loadUser()
+    const onVis = () => loadUser()
+    const onFocus = () => loadUser()
+    const onAuth = () => loadUser()
+    document.addEventListener('visibilitychange', onVis)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('focus', onFocus)
+      window.addEventListener('auth:changed', onAuth as EventListener)
+    }
+    return () => { 
+      isMounted = false; 
+      document.removeEventListener('visibilitychange', onVis)
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('focus', onFocus)
+        window.removeEventListener('auth:changed', onAuth as EventListener)
+      }
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-white">
       <SiteHeader />
@@ -32,9 +66,23 @@ export default function AboutItemBankPage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">About the Master of Social Work in Psychosocial Software Engineering</h1>
             <p className="text-xl text-blue-100 leading-relaxed">
               A comprehensive national assessment platform revolutionizing education in Ethiopia through validated,
-              high-quality test items and data-driven insights
+              high-quality and data-driven insights
             </p>
           </div>
+          
+          {/* Post Button visible when signed in */}
+          {currentUser && (
+            <div className="absolute top-4 right-4">
+              <Button
+                onClick={() => setPostModalOpen(true)}
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+                size="sm"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Post News
+              </Button>
+            </div>
+          )}
         </div>
   </motion.section>
 
@@ -484,6 +532,9 @@ export default function AboutItemBankPage() {
   </motion.section>
 
       <SiteFooter />
+      
+      {/* Post News Modal */}
+      <PostNewsModal open={postModalOpen} onOpenChange={setPostModalOpen} />
     </div>
   )
 }

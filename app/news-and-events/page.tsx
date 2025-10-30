@@ -1,13 +1,80 @@
+"use client"
+import { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { Calendar, Clock, MapPin, Newspaper, Users, Award } from "lucide-react"
+import { Calendar, Clock, MapPin, Newspaper, Plus } from "lucide-react"
 import Image from "next/image"
+import { PostNewsModal } from "@/components/post-news-modal"
+
+type NewsItem = {
+  _id?: string
+  title: string
+  description: string
+  image?: string | null
+  createdAt?: string
+}
+
+type RenderItem = {
+  id?: string
+  title: string
+  image?: string | null
+  date?: string
+  category?: string
+  excerpt?: string
+  description?: string
+  createdAt?: string
+}
 
 export default function NewsAndEventsPage() {
-  const newsItems = [
+  const [currentUser, setCurrentUser] = useState<{ name: string; isAdmin?: boolean } | null>(null)
+  const [postModalOpen, setPostModalOpen] = useState(false)
+  const [newsItems, setNewsItems] = useState<NewsItem[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    let isMounted = true
+    const loadUser = async () => {
+      try {
+        const res = await fetch('/api/auth/me', { credentials: 'include' })
+        const data = await res.json()
+        if (isMounted) setCurrentUser(data.user)
+      } catch {}
+    }
+    const loadNews = async () => {
+      try {
+        const res = await fetch('/api/news')
+        const data = await res.json()
+        if (isMounted) setNewsItems(data.items || [])
+      } finally {
+        if (isMounted) setLoading(false)
+      }
+    }
+    loadUser()
+    loadNews()
+    const onVis = () => loadUser()
+    const onFocus = () => loadUser()
+    const onAuth = () => loadUser()
+    if (typeof window !== 'undefined') {
+      document.addEventListener('visibilitychange', onVis)
+      window.addEventListener('focus', onFocus)
+      window.addEventListener('auth:changed', onAuth as EventListener)
+      window.addEventListener('news:posted', loadNews as unknown as EventListener)
+    }
+    return () => { 
+      isMounted = false 
+      if (typeof window !== 'undefined') {
+        document.removeEventListener('visibilitychange', onVis)
+        window.removeEventListener('focus', onFocus)
+        window.removeEventListener('auth:changed', onAuth as EventListener)
+        window.removeEventListener('news:posted', loadNews as unknown as EventListener)
+      }
+    }
+  }, [])
+
+  const dummyNews = [
     {
       title: "Program Introduces New Digital Intervention Features",
       date: "March 15, 2024",
@@ -57,6 +124,12 @@ export default function NewsAndEventsPage() {
       image: "/award-trophy-education.jpg",
     },
   ]
+
+  // Normalize items for rendering to avoid TS union issues
+  const renderItems: RenderItem[] = (loading
+    ? dummyNews
+    : (newsItems as unknown as RenderItem[])
+  )
 
   const upcomingEvents = [
     {
@@ -139,6 +212,7 @@ export default function NewsAndEventsPage() {
               Stay updated with the latest news, announcements, and upcoming events from the Master of Social Work in Psychosocial Software Engineering
             </p>
           </div>
+          {/* Post button moved below news list */}
         </div>
       </section>
 
@@ -152,18 +226,23 @@ export default function NewsAndEventsPage() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsItems.map((news, index) => (
-            <Card key={index} className="border-2 hover:border-blue-600 transition-colors overflow-hidden">
+          {renderItems.length === 0 && !loading && (
+            <div className="col-span-full text-center text-gray-600">
+              No news has been posted yet.
+            </div>
+          )}
+          {renderItems.map((news, index) => (
+            <Card key={news.id || index} className="border-2 hover:border-blue-600 transition-colors overflow-hidden">
               <img src={news.image || "/placeholder.svg"} alt={news.title} className="w-full h-48 object-cover" />
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
-                  <Badge className={getCategoryColor(news.category)}>{news.category}</Badge>
-                  <span className="text-sm text-gray-600">{news.date}</span>
+                  <Badge className="bg-blue-100 text-blue-700">{news.category || 'Update'}</Badge>
+                  <span className="text-sm text-gray-600">{news.date || (news.createdAt ? new Date(news.createdAt).toLocaleDateString() : '')}</span>
                 </div>
                 <CardTitle className="text-xl">{news.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700 leading-relaxed mb-4">{news.excerpt}</p>
+                <p className="text-gray-700 leading-relaxed mb-4">{news.excerpt || (news.description?.slice(0, 140) + (news.description && news.description.length > 140 ? '…' : ''))}</p>
                 <Button variant="link" className="p-0 h-auto text-blue-600">
                   Read More →
                 </Button>
@@ -171,10 +250,19 @@ export default function NewsAndEventsPage() {
             </Card>
           ))}
         </div>
+
+        {/* Post button (visible only when signed in) */}
+        {currentUser && (
+          <div className="mt-8 flex justify-end">
+            <Button onClick={() => setPostModalOpen(true)} className="bg-blue-600 hover:bg-blue-700 text-white">
+              <Plus className="w-4 h-4 mr-2" /> Post News
+            </Button>
+          </div>
+        )}
       </section>
 
       {/* Upcoming Events Section */}
-      {/* <section className="bg-gray-50 py-16">
+      <section className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
@@ -214,9 +302,12 @@ export default function NewsAndEventsPage() {
             ))}
           </div>
         </div>
-      </section> */}
+      </section>
 
       <SiteFooter />
+
+      {/* Post News Modal */}
+      <PostNewsModal open={postModalOpen} onOpenChange={setPostModalOpen} />
     </div>
   )
 }

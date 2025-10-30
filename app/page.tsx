@@ -16,7 +16,7 @@ import { useState, useEffect } from "react"
 export default function HomePage() {
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [showMore, setShowMore] = useState(false)
-  const [currentUser, setCurrentUser] = useState<{ name: string } | null>(null)
+  const [currentUser, setCurrentUser] = useState<{ name: string; isAdmin?: boolean } | null>(null)
 
   useEffect(() => {
     let isMounted = true

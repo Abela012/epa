@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 		const users = db.collection('users');
 		const user = await users.findOne({ _id: new (await import('bson')).ObjectId(decoded.userId) }, { projection: { password: 0 } });
 		if (!user) return res.status(200).json({ user: null });
-		res.status(200).json({ user: { id: user._id, name: user.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : (user.name || user.email), email: user.email } });
+		res.status(200).json({ user: { id: user._id, name: user.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : (user.name || user.email), email: user.email, isAdmin: user.isAdmin || false } });
 	} catch (e) {
 		return res.status(200).json({ user: null });
 	}

@@ -159,6 +159,10 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
           // Optionally redirect or refresh the page
           window.location.reload()
         }, 1500)
+          // Broadcast auth change so pages can react without full reload
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new Event('auth:changed'))
+          }
       } else {
         setError({ type: 'error', message: data.error || 'Invalid email or password' })
       }

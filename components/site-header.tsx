@@ -308,7 +308,7 @@ export function SiteHeader() {
                 </DropdownMenu>
               ) : (
                 <Button size="sm" onClick={() => setAuthModalOpen(true)}>
-                  Sign Up / Login
+                 Login
                 </Button>
               )}
             </nav>

@@ -101,9 +101,9 @@ export function SiteFooter() {
               </motion.li>
               <motion.li className="flex items-center gap-2" whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                <a href="mailto:info@epaitembank.com" className="hover:text-white transition-colors">
-                  info@pse.org
-                </a>
+                <Link href="/contact-us" className="hover:text-white transition-colors">
+                 info@eps.org
+                </Link>
               </motion.li>
               <motion.li className="flex items-center gap-2" whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                 <Phone className="w-4 h-4 flex-shrink-0" />

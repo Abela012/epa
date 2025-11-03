@@ -118,9 +118,6 @@ export default function ContactUsPage() {
                       </p>
                       <p className="text-gray-700">
                         Technical Support:{" "}
-                        <a href="mailto:support@epaitembank.com" className="text-blue-600 hover:underline">
-                          support@epaitembank.com
-                        </a>
                       </p>
                     </div>
                   </div>

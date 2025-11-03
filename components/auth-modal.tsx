@@ -31,7 +31,7 @@ interface AuthError {
 
 export function AuthModal({ open, onOpenChange }: AuthModalProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const [activeTab, setActiveTab] = useState("signin")
+  // Remove tabs, always show sign-in
   const [error, setError] = useState<AuthError | null>(null)
   
   const [formData, setFormData] = useState<FormData>({
@@ -176,18 +176,16 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
   const handleModalClose = (open: boolean) => {
     if (!open) {
       resetForm()
-      setActiveTab("signin")
     }
     onOpenChange(open)
   }
 
   return (
     <Dialog open={open} onOpenChange={handleModalClose}>
-      <DialogContent className="sm:max-w-[800px] p-0">
+      <DialogContent className="sm:max-w-[400px]">
         <DialogHeader className="px-6 pt-6">
-          <DialogTitle className="text-2xl font-bold text-center">Welcome to the Master of Social Work in Psychosocial Software Engineering</DialogTitle>
+          <DialogTitle className="text-2xl font-bold text-center">Sign In</DialogTitle>
         </DialogHeader>
-        
         {/* Error/Success Alert */}
         {error && (
           <div className="mx-6 mb-4">
@@ -205,130 +203,48 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
             </Alert>
           </div>
         )}
-
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mx-6 mb-4">
-            <TabsTrigger value="signin">Sign In</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="signin" className="px-6 pb-6">
-            <form onSubmit={handleSignIn} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="signin-email">Email</Label>
-                <Input 
-                  id="signin-email" 
-                  type="email" 
-                  placeholder="Enter your email" 
-                  value={formData.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
-                  required 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="signin-password">Password</Label>
-                <Input 
-                  id="signin-password" 
-                  type="password" 
-                  placeholder="Enter your password" 
-                  value={formData.password}
-                  onChange={(e) => handleInputChange('password', e.target.value)}
-                  required 
-                />
-              </div>
-              <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 text-sm cursor-pointer">
-                  <input 
-                    type="checkbox" 
-                    className="rounded"
-                    checked={formData.rememberMe}
-                    onChange={(e) => handleInputChange('rememberMe', e.target.checked)}
-                  />
-                  Remember me
-                </label>
-                <Button variant="link" className="px-0 text-sm" type="button">
-                  Forgot password?
-                </Button>
-              </div>
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Signing in..." : "Sign In"}
-              </Button>
-            </form>
-          </TabsContent>
-
-          <TabsContent value="signup" className="px-6 pb-6">
-            <form onSubmit={handleSignUp} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signup-firstname">First Name</Label>
-                  <Input 
-                    id="signup-firstname" 
-                    type="text" 
-                    placeholder="First name" 
-                    value={formData.firstName}
-                    onChange={(e) => handleInputChange('firstName', e.target.value)}
-                    required 
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-lastname">Last Name</Label>
-                  <Input 
-                    id="signup-lastname" 
-                    type="text" 
-                    placeholder="Last name" 
-                    value={formData.lastName}
-                    onChange={(e) => handleInputChange('lastName', e.target.value)}
-                    required 
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="signup-email">Email</Label>
-                <Input 
-                  id="signup-email" 
-                  type="email" 
-                  placeholder="Enter your email" 
-                  value={formData.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
-                  required 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="signup-password">Password</Label>
-                <Input 
-                  id="signup-password" 
-                  type="password" 
-                  placeholder="Create a password" 
-                  value={formData.password}
-                  onChange={(e) => handleInputChange('password', e.target.value)}
-                  required 
-                />
-                <p className="text-xs text-gray-500">Password must be at least 6 characters</p>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="signup-confirm">Confirm Password</Label>
-                <Input 
-                  id="signup-confirm" 
-                  type="password" 
-                  placeholder="Confirm your password" 
-                  value={formData.confirmPassword}
-                  onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                  required 
-                />
-                {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                  <p className="text-xs text-red-500">Passwords do not match</p>
-                )}
-              </div>
-              <div className="flex items-start gap-2">
-                <input type="checkbox" className="mt-1 rounded" required />
-                <label className="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy</label>
-              </div>
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Creating account..." : "Sign Up"}
-              </Button>
-            </form>
-          </TabsContent>
-        </Tabs>
+        <form onSubmit={handleSignIn} className="space-y-4 px-6 pb-6">
+          <div className="space-y-2">
+            <h2 className="font-bold text-gray-500">For admins only</h2>
+            <Label htmlFor="signin-email">Email</Label>
+            <Input 
+              id="signin-email" 
+              type="email" 
+              placeholder="Enter your email" 
+              value={formData.email}
+              onChange={(e) => handleInputChange('email', e.target.value)}
+              required 
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="signin-password">Password</Label>
+            <Input 
+              id="signin-password" 
+              type="password" 
+              placeholder="Enter your password" 
+              value={formData.password}
+              onChange={(e) => handleInputChange('password', e.target.value)}
+              required 
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <label className="flex items-center gap-2 text-sm cursor-pointer">
+              <input 
+                type="checkbox" 
+                className="rounded"
+                checked={formData.rememberMe}
+                onChange={(e) => handleInputChange('rememberMe', e.target.checked)}
+              />
+              Remember me
+            </label>
+            <Button variant="link" className="px-0 text-sm" type="button">
+              Forgot password?
+            </Button>
+          </div>
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? "Signing in..." : "Sign In"}
+          </Button>
+        </form>
       </DialogContent>
     </Dialog>
   )

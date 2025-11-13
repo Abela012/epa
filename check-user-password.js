@@ -57,4 +57,3 @@ async function checkUserPassword(email) {
 // Get email from command line or use default
 const email = process.argv[2] || 'admin@gmail.com';
 await checkUserPassword(email);
-

@@ -3,14 +3,14 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
-    const { email, password, rememberMe } = req.body;
-    if (!email || !password) {
-        return res.status(400).json({ error: 'Missing fields' });
-    }
-    try {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+  const { email, password, rememberMe } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Missing fields' });
+  }
+  try {
         // Security: Never log sensitive keys or expose them in responses
 
         // Check if Supabase is initialized
@@ -45,8 +45,8 @@ export default async function handler(req, res) {
 
         // Check if password field exists and is not null
         if (!user.password) {
-            return res.status(401).json({ error: 'Invalid credentials' });
-        }
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
 
         // Validate password against stored bcrypt hash
         let valid = await bcrypt.compare(password, user.password);
@@ -68,14 +68,14 @@ export default async function handler(req, res) {
 
                 // Password is now valid (it matched plain text)
                 valid = true;
-            } else {
+    } else {
                 return res.status(401).json({ error: 'Invalid credentials' });
             }
-        }
+    }
 
-        if (!valid) {
-            return res.status(401).json({ error: 'Invalid credentials' });
-        }
+    if (!valid) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
 
         // Generate JWT token with user info
         const token = jwt.sign({
@@ -86,7 +86,7 @@ export default async function handler(req, res) {
             process.env.JWT_SECRET, { expiresIn: rememberMe ? '30d' : '1d' }
         );
 
-        res.setHeader('Set-Cookie', `token=${token}; Path=/; HttpOnly; Max-Age=${rememberMe ? 2592000 : 86400}`);
+    res.setHeader('Set-Cookie', `token=${token}; Path=/; HttpOnly; Max-Age=${rememberMe ? 2592000 : 86400}`);
         return res.status(200).json({
             message: 'Signed in',
             user: {
@@ -95,9 +95,9 @@ export default async function handler(req, res) {
                 isAdmin: user.is_admin || false
             }
         });
-    } catch (err) {
+  } catch (err) {
         // Log full error for debugging but don't expose to client
         console.error('Signin error:', err.message, err.stack);
-        res.status(500).json({ error: 'Server error' });
-    }
+    res.status(500).json({ error: 'Server error' });
+  }
 }

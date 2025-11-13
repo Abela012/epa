@@ -4,10 +4,10 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "node --max-old-space-size=1024 app.js",
-        "build": "node --max-old-space-size=1024 next build",
+        "dev": "next dev",
+        "build": "next build",
         "lint": "next lint",
-        "start": "node --max-old-space-size=1024 app.js"
+        "start": "next start"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.10.0",

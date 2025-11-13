@@ -1,50 +1,74 @@
-import clientPromise from './lib/mongodb.js';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import readline from 'readline';
 
+// Load environment variables from .env.local BEFORE importing supabase
+const __filename = fileURLToPath(
+    import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: join(__dirname, '.env.local') });
+
+import supabase from './lib/supabase.js';
+
 const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
+    input: process.stdin,
+    output: process.stdout
 });
 
 async function setAdminUser() {
-  try {
-    const client = await clientPromise;
-    const db = client.db('epa-item-bank');
-    const users = db.collection('users');
+    try {
+        // Get all users
+        const { data: allUsers, error: fetchError } = await supabase
+            .from('users')
+            .select('email, name, is_admin');
 
-    // Get all users
-    const allUsers = await users.find({}, { projection: { email: 1, name: 1, isAdmin: 1 } }).toArray();
-    
-    console.log('\n📋 Current users in database:');
-    allUsers.forEach((user, index) => {
-      console.log(`${index + 1}. ${user.email} - ${user.name || 'No name'} ${user.isAdmin ? '(ADMIN)' : ''}`);
-    });
+        if (fetchError) {
+            console.error('❌ Error fetching users:', fetchError);
+            rl.close();
+            process.exit(1);
+        }
 
-    rl.question('\nEnter the email of the user to make admin: ', async (email) => {
-      const user = await users.findOne({ email });
-      
-      if (!user) {
-        console.log('❌ User not found!');
+        console.log('\n📋 Current users in database:');
+        allUsers.forEach((user, index) => {
+            console.log(`${index + 1}. ${user.email} - ${user.name || 'No name'} ${user.is_admin ? '(ADMIN)' : ''}`);
+        });
+
+        rl.question('\nEnter the email of the user to make admin: ', async(email) => {
+            const { data: user, error: userError } = await supabase
+                .from('users')
+                .select('*')
+                .eq('email', email)
+                .single();
+
+            if (userError || !user) {
+                console.log('❌ User not found!');
+                rl.close();
+                process.exit(0);
+            }
+
+            // Update user to admin
+            const { error: updateError } = await supabase
+                .from('users')
+                .update({ is_admin: true })
+                .eq('email', email);
+
+            if (updateError) {
+                console.error('❌ Error updating user:', updateError);
+                rl.close();
+                process.exit(1);
+            }
+
+            console.log(`✅ User ${email} is now an admin!`);
+            rl.close();
+            process.exit(0);
+        });
+
+    } catch (error) {
+        console.error('❌ Error:', error);
         rl.close();
-        process.exit(0);
-      }
-
-      // Update user to admin
-      await users.updateOne(
-        { email },
-        { $set: { isAdmin: true } }
-      );
-
-      console.log(`✅ User ${email} is now an admin!`);
-      rl.close();
-      process.exit(0);
-    });
-
-  } catch (error) {
-    console.error('❌ Error:', error);
-    rl.close();
-    process.exit(1);
-  }
+        process.exit(1);
+    }
 }
 
 setAdminUser();

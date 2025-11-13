@@ -1,118 +1,149 @@
-import clientPromise from '../../../lib/mongodb';
+import supabase from '../../../lib/supabase';
 import jwt from 'jsonwebtoken';
 import { IncomingForm } from 'formidable';
 import fs from 'fs/promises';
 import path from 'path';
 
 export const config = {
-  api: {
-    bodyParser: false,
-  },
+    api: {
+        bodyParser: false,
+    },
 };
 
 export default async function handler(req, res) {
-  if (req.method === 'GET') {
+    if (req.method === 'GET') {
+        try {
+            const { data: items, error } = await supabase
+                .from('news')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(50);
+
+            if (error) {
+                console.error('Error fetching news:', error);
+                return res.status(500).json({ error: 'Internal server error' });
+            }
+
+            const formattedItems = items.map((item) => ({
+                id: item.id,
+                title: item.title,
+                description: item.description,
+                image: item.image,
+                author: item.author,
+                authorId: item.author_id,
+                createdAt: item.created_at,
+                updatedAt: item.updated_at,
+            }));
+
+            return res.status(200).json({ items: formattedItems });
+        } catch (error) {
+            console.error('Error fetching news:', error);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+    }
+
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method not allowed' });
+    }
+
     try {
-      const client = await clientPromise;
-      const db = client.db('epa-item-bank');
-      const news = db.collection('news');
-      const raw = await news
-        .find({})
-        .sort({ createdAt: -1 })
-        .limit(50)
-        .toArray();
-      const items = raw.map((doc) => ({ id: doc._id.toString(), ...doc, _id: undefined }))
-      return res.status(200).json({ items });
-    } catch (error) {
-      console.error('Error fetching news:', error);
-      return res.status(500).json({ error: 'Internal server error' });
-    }
-  }
+        // Verify admin authentication
+        const token = req.cookies ? .token;
+        if (!token) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const { data: user, error: userError } = await supabase
+            .from('users')
+            .select('id, name, email')
+            .eq('id', decoded.userId)
+            .single();
 
-  try {
-    // Verify admin authentication
-    const token = req.cookies?.token;
-    if (!token) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
+        // Allow any authenticated user to post (no admin requirement)
+        if (userError || !user) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const client = await clientPromise;
-    const db = client.db('epa-item-bank');
-    const users = db.collection('users');
-    const user = await users.findOne({ _id: new (await import('bson')).ObjectId(decoded.userId) });
-
-    // Allow any authenticated user to post (no admin requirement)
-    if (!user) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
-
-    // Parse form data
-    const form = new IncomingForm({
-      uploadDir: path.join(process.cwd(), 'public', 'uploads'),
-      keepExtensions: true,
-      maxFileSize: 5 * 1024 * 1024, // 5MB
-    });
-
-    // Ensure upload directory exists
-    try {
-      await fs.mkdir(path.join(process.cwd(), 'public', 'uploads'), { recursive: true });
-    } catch (err) {
-      // Directory might already exist
-    }
-
-    const parseForm = () => {
-      return new Promise((resolve, reject) => {
-        form.parse(req, (err, fields, files) => {
-          if (err) reject(err);
-          resolve({ fields, files });
+        // Parse form data
+        const form = new IncomingForm({
+            uploadDir: path.join(process.cwd(), 'public', 'uploads'),
+            keepExtensions: true,
+            maxFileSize: 5 * 1024 * 1024, // 5MB
         });
-      });
-    };
 
-    const { fields, files } = await parseForm();
+        // Ensure upload directory exists
+        try {
+            await fs.mkdir(path.join(process.cwd(), 'public', 'uploads'), { recursive: true });
+        } catch (err) {
+            // Directory might already exist
+        }
 
-    const title = Array.isArray(fields.title) ? fields.title[0] : fields.title;
-    const description = Array.isArray(fields.description) ? fields.description[0] : fields.description;
+        const parseForm = () => {
+            return new Promise((resolve, reject) => {
+                form.parse(req, (err, fields, files) => {
+                    if (err) reject(err);
+                    resolve({ fields, files });
+                });
+            });
+        };
 
-    if (!title || !description) {
-      return res.status(400).json({ error: 'Title and description are required' });
+        const { fields, files } = await parseForm();
+
+        const title = Array.isArray(fields.title) ? fields.title[0] : fields.title;
+        const description = Array.isArray(fields.description) ? fields.description[0] : fields.description;
+
+        if (!title || !description) {
+            return res.status(400).json({ error: 'Title and description are required' });
+        }
+
+        let imagePath = null;
+        if (files.image) {
+            const imageFile = Array.isArray(files.image) ? files.image[0] : files.image;
+            const filename = `${Date.now()}-${imageFile.originalFilename || 'image.jpg'}`;
+            const newPath = path.join(process.cwd(), 'public', 'uploads', filename);
+
+            await fs.rename(imageFile.filepath, newPath);
+            imagePath = `/uploads/${filename}`;
+        }
+
+        // Save to database
+        const newPost = {
+            title,
+            description,
+            image: imagePath,
+            author: user.name || user.email,
+            author_id: user.id,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+        };
+
+        const { data: post, error: insertError } = await supabase
+            .from('news')
+            .insert(newPost)
+            .select()
+            .single();
+
+        if (insertError) {
+            console.error('Error inserting news:', insertError);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+
+        return res.status(201).json({
+            message: 'News posted successfully',
+            post: {
+                id: post.id,
+                title: post.title,
+                description: post.description,
+                image: post.image,
+                author: post.author,
+                authorId: post.author_id,
+                createdAt: post.created_at,
+                updatedAt: post.updated_at,
+            },
+        });
+    } catch (error) {
+        console.error('Error posting news:', error);
+        return res.status(500).json({ error: 'Internal server error' });
     }
-
-    let imagePath = null;
-    if (files.image) {
-      const imageFile = Array.isArray(files.image) ? files.image[0] : files.image;
-      const filename = `${Date.now()}-${imageFile.originalFilename || 'image.jpg'}`;
-      const newPath = path.join(process.cwd(), 'public', 'uploads', filename);
-      
-      await fs.rename(imageFile.filepath, newPath);
-      imagePath = `/uploads/${filename}`;
-    }
-
-    // Save to database
-    const news = db.collection('news');
-    const newPost = {
-      title,
-      description,
-      image: imagePath,
-      author: user.name || user.email,
-      authorId: user._id,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-
-    const result = await news.insertOne(newPost);
-
-    return res.status(201).json({
-      message: 'News posted successfully',
-      post: { ...newPost, _id: result.insertedId },
-    });
-  } catch (error) {
-    console.error('Error posting news:', error);
-    return res.status(500).json({ error: 'Internal server error' });
-  }
 }

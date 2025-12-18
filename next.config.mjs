@@ -1,18 +1,19 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    unoptimized: true,
-  },
-  serverActions: {
-    bodySizeLimit: '20mb', // Increase as needed
-  },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
+    typescript: {
+        ignoreBuildErrors: true,
+    },
+    images: {
+        unoptimized: true,
+    },
+    // swcMinify: true,
+    productionBrowserSourceMaps: false,
+    compress: true,
+    experimental: {
+        optimizePackageImports: ["@radix-ui"],
+    },
 }
-
 export default nextConfig

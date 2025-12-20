@@ -280,34 +280,6 @@ export default function HomePage() {
               </p>
               {showMore && (
                 <div className="grid sm:grid-cols-2 gap-4 mt-6">
-                <div className="flex items-start gap-3">
-                  <Shield className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                  <div>
-                    <h5 className="font-semibold text-gray-900 mb-1">Placement Testing</h5>
-                    <p className="text-sm text-gray-600">Determine appropriate learning levels</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Zap className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                  <div>
-                    <h5 className="font-semibold text-gray-900 mb-1">Formative Assessment</h5>
-                    <p className="text-sm text-gray-600">Monitor ongoing learning progress</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <BarChart3 className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                  <div>
-                    <h5 className="font-semibold text-gray-900 mb-1">Diagnostic Testing</h5>
-                    <p className="text-sm text-gray-600">Identify learning gaps and needs</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                  <div>
-                    <h5 className="font-semibold text-gray-900 mb-1">Evaluative Testing</h5>
-                    <p className="text-sm text-gray-600">Measure learning outcomes</p>
-                  </div>
-                </div>
               </div>
               )}
               <div className="flex justify-center mt-6">

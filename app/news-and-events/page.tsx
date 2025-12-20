@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { Calendar, Clock, MapPin, Newspaper, Plus } from "lucide-react"
 import Image from "next/image"
 import { PostNewsModal } from "@/components/post-news-modal"
+import { PostEventModal } from "@/components/post-event-modal"
 
 type NewsItem = {
   _id?: string
@@ -31,7 +32,9 @@ type RenderItem = {
 export default function NewsAndEventsPage() {
   const [currentUser, setCurrentUser] = useState<{ name: string; isAdmin?: boolean } | null>(null)
   const [postModalOpen, setPostModalOpen] = useState(false)
+  const [postEventModalOpen, setPostEventModalOpen] = useState(false)
   const [newsItems, setNewsItems] = useState<NewsItem[]>([])
+  const [eventsItems, setEventsItems] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -52,8 +55,18 @@ export default function NewsAndEventsPage() {
         if (isMounted) setLoading(false)
       }
     }
+    const loadEvents = async () => {
+      try {
+        const res = await fetch('/api/events')
+        const data = await res.json()
+        if (isMounted) setEventsItems(data.items || [])
+      } finally {
+        // no-op
+      }
+    }
     loadUser()
     loadNews()
+    loadEvents()
     const onVis = () => loadUser()
     const onFocus = () => loadUser()
     const onAuth = () => loadUser()
@@ -62,6 +75,7 @@ export default function NewsAndEventsPage() {
       window.addEventListener('focus', onFocus)
       window.addEventListener('auth:changed', onAuth as EventListener)
       window.addEventListener('news:posted', loadNews as unknown as EventListener)
+      window.addEventListener('events:posted', loadEvents as unknown as EventListener)
     }
     return () => { 
       isMounted = false 
@@ -70,6 +84,7 @@ export default function NewsAndEventsPage() {
         window.removeEventListener('focus', onFocus)
         window.removeEventListener('auth:changed', onAuth as EventListener)
         window.removeEventListener('news:posted', loadNews as unknown as EventListener)
+        window.removeEventListener('events:posted', loadEvents as unknown as EventListener)
       }
     }
   }, [])
@@ -131,44 +146,8 @@ export default function NewsAndEventsPage() {
     : (newsItems as unknown as RenderItem[])
   )
 
-  const upcomingEvents = [
-    {
-      title: "Annual Assessment Conference 2024",
-      date: "April 15-17, 2024",
-      time: "9:00 AM - 5:00 PM",
-      location: "Addis Ababa Conference Center",
-      type: "Conference",
-      description:
-        "Join educators, researchers, and policymakers for three days of presentations, workshops, and networking focused on educational assessment excellence.",
-    },
-    {
-      title: "Item Writing Workshop",
-      date: "April 22, 2024",
-      time: "10:00 AM - 4:00 PM",
-      location: "EPA Training Center",
-      type: "Workshop",
-      description:
-        "Hands-on workshop for educators interested in developing high-quality test items. Learn best practices in item construction and validation.",
-    },
-    {
-      title: "Webinar: Using Data to Improve Learning",
-      date: "April 28, 2024",
-      time: "2:00 PM - 3:30 PM",
-      location: "Online",
-      type: "Webinar",
-      description:
-        "Free online session exploring how to use assessment data effectively to identify learning gaps and inform instructional decisions.",
-    },
-    {
-      title: "Regional Training - Oromia",
-      date: "May 5-6, 2024",
-      time: "9:00 AM - 5:00 PM",
-      location: "Adama, Oromia Region",
-      type: "Training",
-      description:
-        "Two-day intensive training for educators in Oromia region on using the EPA Item Bank platform and creating effective assessments.",
-    },
-  ]
+  // Use the events fetched from the API. If there are none, the UI will show "No upcoming events." to non-admin users.
+  const upcomingEvents = eventsItems
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
@@ -212,7 +191,7 @@ export default function NewsAndEventsPage() {
               Stay updated with the latest news, announcements, and upcoming events from the Master of Social Work in Psychosocial Software Engineering
             </p>
           </div>
-          {/* Post button moved below news list */}
+              {/* Post button moved below news list */}
         </div>
       </section>
 
@@ -271,36 +250,36 @@ export default function NewsAndEventsPage() {
             <h2 className="text-3xl font-bold text-gray-900">Upcoming Events</h2>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
-            {upcomingEvents.map((event, index) => (
-              <Card key={index} className="border-2 hover:border-blue-600 transition-colors">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {upcomingEvents.length === 0 && (
+              <div className="col-span-full text-center text-gray-600">No upcoming events.</div>
+            )}
+            {upcomingEvents.map((evt: any, idx: number) => (
+              <Card key={evt.id || idx} className="border-2 hover:border-green-600 transition-colors overflow-hidden">
+                <img src={evt.image || '/placeholder.jpg'} alt={evt.title} className="w-full h-48 object-cover" />
                 <CardHeader>
-                  <div className="flex items-start justify-between mb-2">
-                    <Badge className={getEventTypeColor(event.type)}>{event.type}</Badge>
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge className={getEventTypeColor(evt.type || 'Training')}>{evt.type || 'Event'}</Badge>
+                    <span className="text-sm text-gray-600">{evt.date || ''} {evt.time ? ` • ${evt.time}` : ''}</span>
                   </div>
-                  <CardTitle className="text-xl">{event.title}</CardTitle>
+                  <CardTitle className="text-xl">{evt.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-3 mb-4">
-                    <div className="flex items-center gap-2 text-gray-700">
-                      <Calendar className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                      <span className="text-sm">{event.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-700">
-                      <Clock className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                      <span className="text-sm">{event.time}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-700">
-                      <MapPin className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                      <span className="text-sm">{event.location}</span>
-                    </div>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed mb-4">{event.description}</p>
-                  <Button className="w-full">Register Now</Button>
+                  <p className="text-gray-700 leading-relaxed mb-4">{evt.description?.slice(0, 140) || ''}</p>
+                  <div className="text-sm text-gray-600"><MapPin className="w-4 h-4 inline-block mr-1" /> {evt.location || ''}</div>
                 </CardContent>
               </Card>
             ))}
           </div>
+
+          {/* Post Event button (visible when signed in) */}
+          {currentUser && (
+            <div className="mt-8 flex justify-end">
+              <Button onClick={() => setPostEventModalOpen(true)} className="bg-green-600 hover:bg-green-700 text-white">
+                <Plus className="w-4 h-4 mr-2" /> Post Event
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -308,6 +287,8 @@ export default function NewsAndEventsPage() {
 
       {/* Post News Modal */}
       <PostNewsModal open={postModalOpen} onOpenChange={setPostModalOpen} />
+      {/* Post Event Modal (admin only) */}
+      <PostEventModal open={postEventModalOpen} onOpenChange={setPostEventModalOpen} />
     </div>
   )
 }

@@ -77,16 +77,23 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
+        // Determine admin flag: prefer DB flag, but allow an override via ADMIN_EMAIL env var
+        const adminEmail = process.env.ADMIN_EMAIL || 'admin@gmail.com';
+        const isAdminFlag = !!(user.is_admin || (user.email && user.email.toLowerCase() === adminEmail.toLowerCase()));
+
         // Generate JWT token with user info
         const token = jwt.sign({
                 userId: user.id,
                 email: user.email,
-                isAdmin: user.is_admin || false
+                isAdmin: isAdminFlag
             },
             process.env.JWT_SECRET, { expiresIn: rememberMe ? '30d' : '1d' }
         );
 
-    res.setHeader('Set-Cookie', `token=${token}; Path=/; HttpOnly; Max-Age=${rememberMe ? 2592000 : 86400}`);
+    // Set cookie; include SameSite for better browser behavior. Add Secure in production if desired.
+    const sameSite = 'Lax';
+    const secureFlag = process.env.NODE_ENV === 'production' ? '; Secure' : '';
+    res.setHeader('Set-Cookie', `token=${token}; Path=/; HttpOnly; SameSite=${sameSite}; Max-Age=${rememberMe ? 2592000 : 86400}${secureFlag}`);
         return res.status(200).json({
             message: 'Signed in',
             user: {

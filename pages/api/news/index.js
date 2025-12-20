@@ -48,8 +48,8 @@ export default async function handler(req, res) {
     }
 
     try {
-        // Verify admin authentication
-        const token = req.cookies ? .token;
+    // Verify admin authentication
+    const token = req.cookies?.token;
         if (!token) {
             return res.status(401).json({ error: 'Unauthorized' });
         }

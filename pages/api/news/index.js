@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { IncomingForm } from 'formidable';
 import fs from 'fs/promises';
 import path from 'path';
+import os from 'os';
 
 export const config = {
     api: {
@@ -65,19 +66,12 @@ export default async function handler(req, res) {
             return res.status(401).json({ error: 'Unauthorized' });
         }
 
-        // Parse form data
+        // Parse form data (use OS temp dir for uploaded files)
         const form = new IncomingForm({
-            uploadDir: path.join(process.cwd(), 'public', 'uploads'),
+            uploadDir: os.tmpdir(),
             keepExtensions: true,
             maxFileSize: 5 * 1024 * 1024, // 5MB
         });
-
-        // Ensure upload directory exists
-        try {
-            await fs.mkdir(path.join(process.cwd(), 'public', 'uploads'), { recursive: true });
-        } catch (err) {
-            // Directory might already exist
-        }
 
         const parseForm = () => {
             return new Promise((resolve, reject) => {
@@ -101,10 +95,37 @@ export default async function handler(req, res) {
         if (files.image) {
             const imageFile = Array.isArray(files.image) ? files.image[0] : files.image;
             const filename = `${Date.now()}-${imageFile.originalFilename || 'image.jpg'}`;
-            const newPath = path.join(process.cwd(), 'public', 'uploads', filename);
 
-            await fs.rename(imageFile.filepath, newPath);
-            imagePath = `/uploads/${filename}`;
+            // Read file into buffer from temp location
+            const fileBuffer = await fs.readFile(imageFile.filepath);
+
+            // Upload to Supabase Storage (ensure bucket "news-images" exists)
+            const storagePath = `news/${filename}`;
+            const { error: uploadError } = await supabase.storage
+                .from('news-images')
+                .upload(storagePath, fileBuffer, {
+                    contentType: imageFile.mimetype || 'image/jpeg',
+                    cacheControl: '3600',
+                    upsert: false,
+                });
+
+            // Clean up temp file (best-effort)
+            try {
+                await fs.unlink(imageFile.filepath);
+            } catch {
+                // ignore
+            }
+
+            if (uploadError) {
+                console.error('Error uploading image to Supabase Storage:', uploadError);
+                return res.status(500).json({ error: 'Error uploading image' });
+            }
+
+            const { data: publicUrlData } = supabase.storage
+                .from('news-images')
+                .getPublicUrl(storagePath);
+
+            imagePath = publicUrlData ? .publicUrl || null;
         }
 
         // Save to database

@@ -89,60 +89,11 @@ export default function NewsAndEventsPage() {
     }
   }, [])
 
-  const dummyNews = [
-    {
-      title: "Program Introduces New Digital Intervention Features",
-      date: "March 15, 2024",
-      category: "Product Update",
-      excerpt:
-        "We're excited to announce the launch of new advanced assessment features including adaptive testing capabilities and enhanced analytics dashboard for educators.",
-      image: "/educational-technology-dashboard.jpg",
-    },
-    {
-      title: "Partnership Announcement with Ministry of Education",
-      date: "March 10, 2024",
-      category: "Partnership",
-      excerpt:
-        "EPA Item Bank signs strategic partnership agreement with the Ministry of Education to expand access to quality assessment tools across all regions of Ethiopia.",
-      image: "/partnership-handshake-education.jpg",
-    },
-    {
-      title: "Research Study Shows Improved Learning Outcomes",
-      date: "February 28, 2024",
-      category: "Research",
-      excerpt:
-        "New research demonstrates significant improvements in student learning outcomes in schools using EPA Item Bank assessments compared to traditional methods.",
-      image: "/students-learning-classroom.jpg",
-    },
-    {
-      title: "10,000 Practitioners Trained in Psychosocial Software Engineering",
-      date: "February 20, 2024",
-      category: "Milestone",
-      excerpt:
-        "We've reached a major milestone with over 10,000 teachers across Ethiopia now actively using the item bank to create and administer assessments.",
-      image: "/teachers-celebrating-milestone.jpg",
-    },
-    {
-      title: "New Training Program for Item Writers Launched",
-      date: "February 5, 2024",
-      category: "Training",
-      excerpt:
-        "Comprehensive training program launched to build capacity of educators in developing high-quality, psychometrically sound test items.",
-      image: "/training-workshop-education.jpg",
-    },
-    {
-      title: "Program Wins Innovation Award",
-      date: "January 25, 2024",
-      category: "Award",
-      excerpt:
-        "The platform has been recognized with the National Education Innovation Award for its contribution to improving assessment quality in Ethiopia.",
-      image: "/award-trophy-education.jpg",
-    },
-  ]
+ 
 
   // Normalize items for rendering to avoid TS union issues
   const renderItems: RenderItem[] = (loading
-    ? dummyNews
+    ? []
     : (newsItems as unknown as RenderItem[])
   )
 

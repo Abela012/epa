@@ -1,6 +1,6 @@
 
 "use client"
-import { useEffect, useState, useRef } from "react"
+import { useRef } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
@@ -14,16 +14,24 @@ type DownloadableFile = {
 }
 
 export default function DownloadablesPage() {
-  const [files, setFiles] = useState<DownloadableFile[]>([])
-
-
-  useEffect(() => {
-    fetch("/api/downloadables")
-      .then((res) => res.json())
-      .then((data) => setFiles(data))
-      .catch(() => setFiles([]))
-  }, [])
-
+  const files: DownloadableFile[] = [
+  {
+    name: "02 - CURRICULUM -  August 31 2025 (1)",
+    url: "/downloads/02 - CURRICULUM -  August 31 2025 (1).docx",
+  },
+  {
+    name: "03 - Project Management Guideline - August 31 2025 (1)",
+    url: "/downloads/03 - Project Management Guideline - August 31 2025 (1).docx",
+  },
+  {
+    name: "04 - PSSE Proposal Synopsis - August 31 2025",
+    url: "/downloads/04 - PSSE Proposal Synopsis - August 31 2025.docx",
+  },
+  {
+    name: "05_PSSE_Stakeholders'_Validation Presentation_August_31_2025",
+    url: "/downloads/05_PSSE_Stakeholders'_Validation_Presentation_August_31_2025.pptx",
+  },
+]
 
 
   const getColorClasses = (color: string) => {
